@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finans ve ön muhasebe takibi için yazılım neden şart? · Ambar Labs</title>
+<meta name="description" content="Mali müşavir yasal defteri tutar; alacak, borç ve nakit takibi firmaya kalır. Nakit akışı, alacak yaşlandırma ve faturalamayı tek kayıtta toplamanın yolu.">
+<meta property="og:title" content="Finans ve ön muhasebe takibi için yazılım neden şart?">
+<meta property="og:description" content="Mali müşavir yasal defteri tutar; alacak, borç ve nakit takibi firmaya kalır. Nakit akışı, alacak yaşlandırma ve faturalamayı tek kayıtta toplamanın yolu.">
+<meta property="og:site_name" content="Ambar Labs">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/ambarlabs/yazilar/finans-muhasebe-yonetimi-yazilimi/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/ambarlabs/en/articles/finance-accounting-software/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Mali müşavirimiz varken ayrıca buna gerek var mı?", "acceptedAnswer": {"@type": "Answer", "text": "İkisi farklı işler. Mali müşavir geçmiş dönemin yasal kaydını tutar. Finans takibi ise bugünkü alacak, borç ve nakit durumunu gösterir ve firmanın günlük kararları için gereklidir."}}, {"@type": "Question", "name": "Ön muhasebe programı kullanıyoruz, yeterli değil mi?", "acceptedAnswer": {"@type": "Answer", "text": "Cari ve fatura takibi için yeterli olabilir. Eksik kaldığı yer genellikle satış, stok ve projelerle bağlantı. Aynı bilgiyi iki sisteme giriyorsanız ya da nakit tablosunu hâlâ Excel'de hazırlıyorsanız bir üst adıma bakma zamanı gelmiştir."}}, {"@type": "Question", "name": "Geçmiş kayıtları aktarmak gerekir mi?", "acceptedAnswer": {"@type": "Answer", "text": "Hepsini değil. Açık faturalar, güncel cari bakiyeler ve vadesi gelmemiş çek ve senetler yeter. Kapanmış eski kayıtlar eski yerinde kalabilir."}}]}
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<path fill="currentColor" d="M10 50 V34 a5 5 0 0 1 10 0 V50 Z"/><path fill="currentColor" d="M26 50 V24 a6 6 0 0 1 12 0 V50 Z"/>
+<path class="g" d="M44 50 V14 a7 7 0 0 1 14 0 V50 Z"/><rect fill="currentColor" x="4" y="52" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>ambar<span> labs</span></b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../#harman">Harman</a><a href="../../#yontem">Yöntem</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/articles/finance-accounting-software/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<article class="article wrap"><a class="back mono" href="../../yazilar/">← Tüm yazılar</a><p class="eyebrow">Finans ve Muhasebe</p><h1>Finans ve ön muhasebe takibi için yazılım neden şart?</h1><p class="ameta mono">7 Ekim 2026 · 6 dk okuma</p><div class="prose"><p class="lead">Birçok firma sahibi "muhasebemiz var" der ve kastettiği mali müşaviridir. Mali müşavir faturaları işler, beyannameleri verir, yasal defterleri tutar. Ama "bu hafta kime ne ödeyeceğiz, kimden ne alacağız, ay sonunu çıkarır mıyız" sorularının cevabı onda durmaz. Bu sorular firmanın kendi içinde, çoğu zaman patronun aklında ve bir Excel dosyasında cevap bekler.</p>
+
+  <figure>
+    <img src="../../assets/blog/finans-hesap-makinesi.jpg" alt="Yakın çekim hesap makinesi tuşları" width="1024" height="576">
+  </figure>
+
+  <h2>İki ayrı muhasebe var</h2>
+  <p>Birincisi devlete karşı tutulan resmi muhasebe. Geçmişe bakar, kuralları bellidir, mali müşavir yürütür. İkincisi firmanın kendini yönetmek için tuttuğu kayıt. Buna ön muhasebe ya da finans takibi deniyor. Bugüne ve önümüzdeki haftalara bakar.</p>
+  <p>İlki için herkes bir şekilde düzen kurmuş durumda, çünkü zorunlu. İkincisi çoğu firmada dağınık. Cari hesaplar bir Excel'de, çekler bir ajandada, banka hareketleri internet şubesinde, kredi taksitleri bir başka dosyadadır. Hepsini bir arada gören tek yer patronun zihnidir.</p>
+
+  <h2>Kasada para var, peki ya üç hafta sonra?</h2>
+  <p>Finans takibi dendiğinde çoğu firmada yapılan şey, sabah banka hesabına bakmaktır. Bakiyede para varsa işler yolunda sayılır. Bakiye bugünü gösterir. Haftaya vadesi gelecek çeki, ay ortasındaki maaşları, KDV ödemesini ve müşterinin geciken tahsilatını göstermez.</p>
+
+  <figure>
+    <img src="../../assets/blog/finans-nakit-akisi.svg" alt="Örnek sekiz haftalık nakit akışı: haftalık giriş ve çıkışlar ile beşinci haftada eksiye düşen kasa bakiyesi" width="760" height="374" loading="lazy">
+  </figure>
+
+  <p>Kârlı firmaların da nakit sıkıntısına düşmesinin sebebi bu. Satış yapılmış, fatura kesilmiş, kâğıt üzerinde kazanılmıştır. Ama tahsilat altmış gün sonra, tedarikçi ödemesi otuz gün sonra ise aradaki boşluğu bir yerden kapatmak gerekir. Bunu beş hafta önceden gören firma bankayla sakin bir görüşme yapar. Son gün fark eden, bulabildiği en pahalı krediyi kullanır.</p>
+
+  <h2>Tahsil edilmeyen alacak</h2>
+  <p>Görüştüğümüz firmalarda en sık rastladığımız durum, kimin ne kadar borçlu olduğunun bilinmesi ama ne zamandır borçlu olduğunun bilinmemesi. Cari listede yirmi müşteri ve yanlarında tutarlar yazar. Hangisinin vadesi geçmiş, hangisi üç aydır ödeme yapmamış, listeden anlaşılmaz.</p>
+
+  <figure>
+    <img src="../../assets/blog/finans-alacak-yaslandirma.svg" alt="Örnek alacak yaşlandırma tablosu: alacakların vadesi gelmemiş, 1-30, 31-60, 61-90 ve 90 günden eski olarak dağılımı" width="760" height="320" loading="lazy">
+  </figure>
+
+  <p>Vadesi geçmiş alacak aranmadığında müşteri de acele etmez. Parayı ilk isteyene öder. Alacakların yaşını gösteren basit bir liste ve haftada bir yapılan düzenli aramalar, tahsilat süresini belirgin biçimde kısaltır.</p>
+  <p>Benzer bir kayıp faturalamada yaşanır. İş teslim edilmiştir ama fatura kesmek için birinin irsaliyeleri toplaması gerekir, o da ay sonuna kalır. Fatura geç kesildiği için vade geç başlar, para geç gelir.</p>
+
+  <h2>Finans yazılımı neyi bir araya getiriyor?</h2>
+  <p>Yukarıdaki parçaları tek kayıtta topluyor. Satış faturası kesildiğinde müşterinin cari hesabına ve vade takvimine kendiliğinden işlenir. Alış faturası girildiğinde ödeme listesine eklenir. Çekler, senetler, kredi taksitleri ve maaşlar da aynı takvimde durur.</p>
+  <p>Bu kayıtlar bir arada olduğunda önümüzdeki haftaların nakit tablosu kendiliğinden çıkar. Kimseye "bu ay ne ödeyeceğiz" diye sormanız gerekmez.</p>
+  <p>Faturalama satışa bağlanır. Teslim edilen sipariş tek tuşla faturaya döner, e-fatura olarak gönderilir. İş bitti ama faturası kesilmedi durumu ekranda ayrı bir liste olarak görünür.</p>
+  <p>Banka hareketleri sisteme aktarılır ve kayıtlarla eşleştirilir. Hangi tahsilatın hangi faturaya ait olduğu, eşleşmeyen hareketlerin ne olduğu görülür.</p>
+  <p>Giderler de sınıflanır. Hangi departman, hangi proje, hangi araç ne kadar harcıyor, ay sonunda birkaç tıkla çıkar. Buradan sonrası <a href="../../yazilar/proje-karliligi-olcme/">proje kârlılığını ölçme</a> konusuna bağlanıyor.</p>
+
+  <h2>Mali müşavirle iş nasıl bölüşülür?</h2>
+  <p>Firma içinde düzgün tutulan kayıt mali müşavirin işini de kolaylaştırıyor. Ay sonunda bir poşet fatura göndermek yerine, sınıflanmış ve eşleştirilmiş kayıtları aktarırsınız. Ondan gelen tabloyu kendi kaydınızla karşılaştırabilirsiniz.</p>
+  <p>Çoğu firmada mali müşavirin kullandığı programı değiştirmek gerekmez. Firma içindeki sistem veriyi onun programına uygun biçimde dışarı verir. Resmi muhasebeyi tamamen içeri almak isteyen firmalar da var, ama bu ayrı bir karar ve ilk adım olması şart değil.</p>
+
+  <h2>Ne zaman gerekli olur?</h2>
+  <ul>
+    <li>Ayda kesilen ve gelen fatura sayısı yüzü geçtiyse.</li>
+    <li>Vadeli satış ve vadeli alış yapıyorsanız.</li>
+    <li>Çek, senet ya da kredi taksiti takvimi tek kişinin ajandasındaysa.</li>
+    <li>Kimin kaç gündür borçlu olduğunu öğrenmek yarım saatinizi alıyorsa.</li>
+    <li>Önümüzdeki ayın nakit durumunu rakamla söyleyemiyorsanız.</li>
+  </ul>
+
+  <h2>Nereden başlanır?</h2>
+  <p>En çabuk sonuç veren iki konu cari hesap ve vade takibi. Müşteri ve tedarikçi bakiyelerini, açık faturaları ve vadelerini sisteme alın. Bu kadarı bile alacak listesini ve önümüzdeki haftaların ödemelerini görmenizi sağlar.</p>
+  <p>İkinci adım faturalamayı satışa bağlamak, üçüncüsü banka eşleştirmesi. Gider sınıflaması ve bütçe en sona kalabilir.</p>
+  <p>Araç tarafında yalnızca ön muhasebe yapan programlar, satış ve stokla birlikte çalışan ERP sistemleri ve bunların arasında duran çözümler var. Satış, stok ve satın alma başka bir sistemde tutuluyorsa, finansın onlarla konuşması gerekir. Aksi halde her fatura iki kez girilir. Biz seçim yaparken önce bu bağlantıya bakıyoruz.</p>
+
+  <h2>Sık sorulan sorular</h2>
+  <h3>Mali müşavirimiz varken ayrıca buna gerek var mı?</h3>
+  <p>İkisi farklı işler. Mali müşavir geçmiş dönemin yasal kaydını tutar. Finans takibi ise bugünkü alacak, borç ve nakit durumunu gösterir ve firmanın günlük kararları için gereklidir.</p>
+  <h3>Ön muhasebe programı kullanıyoruz, yeterli değil mi?</h3>
+  <p>Cari ve fatura takibi için yeterli olabilir. Eksik kaldığı yer genellikle satış, stok ve projelerle bağlantı. Aynı bilgiyi iki sisteme giriyorsanız ya da nakit tablosunu hâlâ Excel'de hazırlıyorsanız bir üst adıma bakma zamanı gelmiştir.</p>
+  <h3>Geçmiş kayıtları aktarmak gerekir mi?</h3>
+  <p>Hepsini değil. Açık faturalar, güncel cari bakiyeler ve vadesi gelmemiş çek ve senetler yeter. Kapanmış eski kayıtlar eski yerinde kalabilir.</p></div><div class="post-end"><h2>Sizin işinizi de düzene sokalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım, nerede takıldığını görelim.</p></div><nav class="related" aria-label="İlgili yazılar"><p class="eyebrow">İlgili yazılar</p><a href="../../yazilar/proje-karliligi-olcme/">Proje kârlılığı nasıl ölçülür? → →</a><a href="../../yazilar/excelden-erpye/">Excel'den ERP'ye: tablolar neden yetmez oluyor? → →</a></nav></article>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>ambar labs · Konya</span>
+    <span>Web sitesi, SEO ve dijital pazarlama işleri için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+</body>
+</html>

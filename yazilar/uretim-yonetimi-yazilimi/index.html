@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Üretim yönetimi yazılımı ne zaman şart olur? · Ambar Labs</title>
+<meta name="description" content="Excel ve kâğıt iş emriyle yürüyen üretimde para nerede kaybolur, üretim yönetimi yazılımı ne işe yarar ve Excel hangi noktada yetmemeye başlar?">
+<meta property="og:title" content="Üretim yönetimi yazılımı ne zaman şart olur?">
+<meta property="og:description" content="Excel ve kâğıt iş emriyle yürüyen üretimde para nerede kaybolur, üretim yönetimi yazılımı ne işe yarar ve Excel hangi noktada yetmemeye başlar?">
+<meta property="og:site_name" content="Ambar Labs">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/ambarlabs/yazilar/uretim-yonetimi-yazilimi/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/ambarlabs/en/articles/production-management-software/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Küçük bir atölye için de gerekli mi?", "acceptedAnswer": {"@type": "Answer", "text": "Beş kişilik bir atölyede bile sipariş ve malzeme takibini düzene sokmak işe yarıyor. Bu ölçekte büyük bir sistem gerekmez, işe göre kurulmuş sade bir düzen yeter."}}, {"@type": "Question", "name": "Ustalar ve operatörler kullanır mı?", "acceptedAnswer": {"@type": "Answer", "text": "Ekran sadeyse kullanırlar. Operatörden çoğu zaman iki dokunuş istenir: işi başlat, işi bitir. Kullanılmayan sistemlerde genellikle sahadaki kişiye ek iş çıkarılmış ama karşılığında işini kolaylaştıran bir şey verilmemiştir."}}, {"@type": "Question", "name": "Kurulum ne kadar sürer?", "acceptedAnswer": {"@type": "Answer", "text": "Kapsama bağlı. Yalnızca iş emri takibini devreye almak birkaç hafta sürer. Planlama, maliyet ve kaliteyi de içine alan bir sistem birkaç ayı bulur. Biz ilk faydanın erken görülmesi için aşama aşama ilerlemeyi tercih ediyoruz."}}, {"@type": "Question", "name": "Mevcut muhasebe programımızla birlikte çalışır mı?", "acceptedAnswer": {"@type": "Answer", "text": "Çoğu durumda çalışır. Üretim sistemi, kullandığınız muhasebe programına veri aktaracak şekilde kurulabilir. Muhasebe programını değiştirmeniz gerekmez."}}]}
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<path fill="currentColor" d="M10 50 V34 a5 5 0 0 1 10 0 V50 Z"/><path fill="currentColor" d="M26 50 V24 a6 6 0 0 1 12 0 V50 Z"/>
+<path class="g" d="M44 50 V14 a7 7 0 0 1 14 0 V50 Z"/><rect fill="currentColor" x="4" y="52" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>ambar<span> labs</span></b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../#harman">Harman</a><a href="../../#yontem">Yöntem</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/articles/production-management-software/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<article class="article wrap"><a class="back mono" href="../../yazilar/">← Tüm yazılar</a><p class="eyebrow">Üretim Yönetimi</p><h1>Üretim yönetimi yazılımı ne zaman şart olur?</h1><p class="ameta mono">7 Ekim 2026 · 7 dk okuma</p><div class="prose"><p class="lead">Üretim yapan firmaların çoğu işe Excel, kâğıt iş emri ve bir WhatsApp grubuyla başlar. Beş on sipariş varken bu düzenin bir kusuru yoktur, herkes neyin nerede olduğunu bilir. Sipariş sayısı otuzu, kırkı bulduğunda aynı düzen her gün biraz para kaybettirmeye başlar ve bu kaybı kimse toplayıp önünüze koymaz.</p>
+
+  <figure>
+    <img src="../../assets/blog/uretim-fabrika.jpg" alt="Çelik üretim tesisinde vinçle taşınan yük ve sahada çalışan iki kişi" width="1024" height="576">
+  </figure>
+
+  <h2>Atölyede tanıdık sahneler</h2>
+  <p>Gezdiğimiz üretim tesislerinde aynı sahneleri tekrar tekrar görüyoruz. Müşteri arayıp siparişini soruyor, satıştaki arkadaş "bir bakıp döneyim" diyor ve atölyeye iniyor. Perşembe sevk edilecek kapıların menteşesi salı günü bitmiş, kimse fark etmemiş. Kesimde hatalı çıkan parçalar bir köşeye ayrılmış ama kaç tane olduğu hiçbir yere yazılmamış.</p>
+  <p>Planı da genellikle tek kişi bilir, çoğu zaman üretim müdürü ya da en kıdemli usta. O kişi bir hafta izne çıktığında işler yürür ama yavaşlar, çünkü hangi işin öne alınacağına karar verecek başka kimse yoktur.</p>
+  <p>Bir de fiyat meselesi var. "Bu kapıdan kaç lira kazanıyoruz?" diye sorduğunuzda cevap çoğu firmada geçen yılın fiyatı ve üstüne konan zamdır. Gerçek maliyeti hesaplamak için gereken veri, yani kaç saat işçilik gittiği ve ne kadar malzeme çöpe atıldığı, hiç toplanmamıştır.</p>
+
+  <figure>
+    <img src="../../assets/blog/uretim-siparis-yolu.svg" alt="Bir siparişin tekliften sevkiyata yolu: her adımda bilgi Excel, WhatsApp, defter, kâğıt iş emri ve telefon gibi ayrı yerlerde tutuluyor" width="760" height="272" loading="lazy">
+  </figure>
+
+  <h2>Bunun faturası nereye kesiliyor?</h2>
+  <p>Bu sorunların hiçbiri tek başına firmayı zora sokmaz. Zarar, hepsi bir arada yaşandığında birikir.</p>
+  <h3>Geciken teslimat</h3>
+  <p>Geç giden sipariş için bazen ceza ödersiniz, bazen indirim yaparsınız. Daha büyük kayıp sonradan gelir: müşteri bir sonraki işini, verdiği tarihi tutan başka bir firmaya verir ve bunu size söylemez.</p>
+  <h3>Depoda yatan para</h3>
+  <p>Hangi malzemeden ne zaman ne kadar lazım olacağı bilinmeyince satın alma sezgiyle yapılır. Sonuçta depoda altı aylık sac durur ama yarınki iş için gereken vida yoktur. Hat durur, vida şehirdeki ilk nalburdan pazarlıksız alınır.</p>
+  <h3>Yazılmayan fire</h3>
+  <p>Hurdaya giden parça kayda geçmiyorsa, hangi makinede ya da hangi vardiyada sorun olduğunu bilemezsiniz. Ay sonunda malzemenin eksildiğini görürsünüz, sebebini bulamazsınız.</p>
+  <h3>Her şeyin size sorulması</h3>
+  <p>Bilgi bir sistemde durmadığı için en küçük karar bile patrona ya da müdüre gelir. Firma, o bir iki kişinin bir güne sığdırabildiği kadar büyür.</p>
+
+  <h2>Yazılım burada ne işe yarıyor?</h2>
+  <p>Üretim yönetimi yazılımı dediğimiz şey, yukarıdaki bilgileri tek yerde toplayan bir kayıt düzenidir. Markası ve ekranı değişir ama yaptığı işler aşağı yukarı aynıdır.</p>
+  <p>Sipariş onaylandığında sistem bunu bir iş emrine çevirir. İş emrinde hangi malzemeden ne kadar gideceği, hangi işlemlerden hangi sırayla geçeceği ve ne zaman teslim edileceği yazılıdır. Bu bilgi bir kere girilir, sonra kâğıda ya da mesaja yeniden yazılmaz.</p>
+  <p>Operatör işe başlarken ve bitirirken tabletten ya da barkod okuyucudan bir kayıt düşer. Kaç adet çıktı, kaç tanesi hatalıydı, makine neden durdu, hepsi o anda sisteme girer. Akşam birinin formları toplayıp Excel'e geçirmesine gerek kalmaz.</p>
+
+  <figure>
+    <img src="../../assets/blog/uretim-is-emri-ekrani.svg" alt="Örnek iş emri ekranı: beş açık iş emrinin aşaması, ilerlemesi ve zamanında, gecikmede ya da malzeme eksik durumu" width="760" height="344" loading="lazy">
+  </figure>
+
+  <p>Açık iş emirleri belli olduğu için malzeme ihtiyacı da kendiliğinden çıkar. Menteşenin salı günü biteceğini sistem bir hafta önceden gösterir, satın alma da ona göre sipariş geçer.</p>
+  <p>Planlama tarafında, hangi makinenin ve hangi ekibin hangi gün dolu olduğu tek ekranda görünür. Yeni bir sipariş geldiğinde teslim tarihini bu ekrana bakarak verirsiniz.</p>
+  <p>Son olarak maliyet. Harcanan malzeme, geçen süre ve fire iş emrine işlendiği için her siparişin size kaça mal olduğunu görürsünüz. Aşağıdaki örnek abartılı görünebilir ama fire ve fazla mesainin hiç kaydedilmediği firmalarda bu büyüklükte farklar çıkıyor.</p>
+
+  <figure>
+    <img src="../../assets/blog/uretim-maliyet-farki.svg" alt="Örnek maliyet karşılaştırması: teklif verirken hesaplanan maliyet ile iş bitince ortaya çıkan gerçek maliyet arasındaki fark" width="760" height="284" loading="lazy">
+  </figure>
+
+  <h2>"Bizim iş farklı, yazılıma sığmaz"</h2>
+  <p>Bunu neredeyse her görüşmede duyuyoruz ve haksız bir itiraz sayılmaz. Siparişe göre üreten bir firmada her iş birbirinden farklıdır. Seri üretimde asıl dert hızdır. Fason çalışan atölyede malzeme müşterinindir, stok hesabı bambaşka tutulur. Hazır bir paketi alıp hiç dokunmadan kurduğunuzda bu farklar yüzünden sistem kullanılmaz hale gelir.</p>
+  <p>Biz bu yüzden işe yazılımdan başlamıyoruz. Önce firmada bir siparişin nasıl ilerlediğini çıkarıyoruz, sonra sistemi o akışa göre kuruyoruz. Çalışanlar yazılım öyle istiyor diye iş yapış şeklini değiştirmek zorunda kalıyorsa, kurulumda bir şey yanlış gitmiştir.</p>
+
+  <h2>Excel ne zaman yetmemeye başlar?</h2>
+  <p>Üç kişilik bir atölyenin ilk günden üretim yazılımına ihtiyacı yok. Bizim gördüğümüz kadarıyla şu durumlardan biri başladığında Excel işi taşıyamıyor:</p>
+  <ul>
+    <li>Aynı anda yürüyen iş sayısı, bir kişinin aklında tutabileceğini geçtiyse.</li>
+    <li>Ürün birkaç aşamadan geçiyor ve aşamalar arasında bekliyorsa.</li>
+    <li>Geçen ay kaç siparişin geç gittiğini bilmiyorsanız.</li>
+    <li>Malzeme eksiği yüzünden ayda birkaç kez iş duruyorsa.</li>
+    <li>İkinci vardiya, ikinci atölye ya da yeni bir ürün grubu gündemdeyse.</li>
+  </ul>
+
+  <h2>Hangi yazılım?</h2>
+  <p>Seçenek çok: geniş kapsamlı ERP sistemleri var, yalnızca üretim sahasına bakan MES çözümleri var, sektöre özel paketler var, bir de firmaya özel yazılan uygulamalar var. Hangisinin uygun olduğu firmanın büyüklüğüne ve ne ürettiğine bağlı.</p>
+  <p>Biz belli bir ürünü satmaya çalışmıyoruz. Bazı firmalarda uyarlanmış bir ERP kurduk, bazılarında atölyeye özel sade bir uygulama yazdık. Tecrübemiz şu yönde: pahalı ama firmaya uymayan bir sistem, ucuz ama iyi oturtulmuş bir sistemden daha az işe yarıyor.</p>
+
+  <h2>Nereden başlanır?</h2>
+  <p>İlk iş olarak tek bir siparişi baştan sona takip edin. Teklif nerede yazıldı, sipariş atölyeye nasıl iletildi, malzeme nasıl istendi, sevkiyat nasıl haber verildi? Bilginin kâğıda, mesaja ya da birinin hafızasına geçtiği her noktayı not alın. Çoğu firmada bu liste bir sayfayı bulur.</p>
+  <p>Sonra listeden canınızı en çok yakan tek maddeyi seçin. Genellikle bu ya iş emri takibidir ya da malzeme ihtiyacı. Her şeyi aynı anda düzeltmeye kalkan projeler yarıda kalıyor.</p>
+  <p>Seçtiğiniz konuyu önce tek hatta ya da tek ürün grubunda deneyin. Ekip sisteme güvenmeye başladıktan sonra planlamayı, maliyeti ve kaliteyi sırayla eklersiniz.</p>
+
+  <h2>Sık sorulan sorular</h2>
+  <h3>Küçük bir atölye için de gerekli mi?</h3>
+  <p>Beş kişilik bir atölyede bile sipariş ve malzeme takibini düzene sokmak işe yarıyor. Bu ölçekte büyük bir sistem gerekmez, işe göre kurulmuş sade bir düzen yeter.</p>
+  <h3>Ustalar ve operatörler kullanır mı?</h3>
+  <p>Ekran sadeyse kullanırlar. Operatörden çoğu zaman iki dokunuş istenir: işi başlat, işi bitir. Kullanılmayan sistemlerde genellikle sahadaki kişiye ek iş çıkarılmış ama karşılığında işini kolaylaştıran bir şey verilmemiştir.</p>
+  <h3>Kurulum ne kadar sürer?</h3>
+  <p>Kapsama bağlı. Yalnızca iş emri takibini devreye almak birkaç hafta sürer. Planlama, maliyet ve kaliteyi de içine alan bir sistem birkaç ayı bulur. Biz ilk faydanın erken görülmesi için aşama aşama ilerlemeyi tercih ediyoruz.</p>
+  <h3>Mevcut muhasebe programımızla birlikte çalışır mı?</h3>
+  <p>Çoğu durumda çalışır. Üretim sistemi, kullandığınız muhasebe programına veri aktaracak şekilde kurulabilir. Muhasebe programını değiştirmeniz gerekmez.</p></div><div class="post-end"><h2>Sizin işinizi de düzene sokalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım, nerede takıldığını görelim.</p></div><nav class="related" aria-label="İlgili yazılar"><p class="eyebrow">İlgili yazılar</p><a href="../../yazilar/uretim-proje-takibi/">Prefabrik ve imalatta proje bazlı üretim takibi → →</a><a href="../../yazilar/proje-karliligi-olcme/">Proje kârlılığı nasıl ölçülür? → →</a></nav></article>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>ambar labs · Konya</span>
+    <span>Web sitesi, SEO ve dijital pazarlama işleri için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+</body>
+</html>
