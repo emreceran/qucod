@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Proje kârlılığı hesaplama aracı · Qucod</title>
+<meta name="description" content="Teklif tutarı, malzeme, işçilik saati ve genel gideri girin; bir işin görünen kârını ve gerçek kârını, zarar etmeden çalışılabilecek saati görün.">
+<meta property="og:title" content="Proje kârlılığı hesaplama aracı">
+<meta property="og:description" content="Teklif tutarı, malzeme, işçilik saati ve genel gideri girin; bir işin görünen kârını ve gerçek kârını, zarar etmeden çalışılabilecek saati görün.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/proje-karliligi/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/project-profitability/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../araclar/">Araçlar</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a><a href="../../#iletisim">İletişim</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/tools/project-profitability/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../araclar/">← Tüm araçlar</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Ücretsiz araç</div>
+  <h1>Proje kârlılığı hesaplayıcı</h1>
+  <p class="lead">Bir işin teklif tutarını ve giderlerini girin. Araç, faturası gelen giderlere bakınca görünen kârı ve ekip saatiyle genel gider eklenince kalan gerçek kârı yan yana gösterir.</p>
+  <div class="tgrid">
+    <form class="panel" id="pk" onsubmit="return false">
+      <h2>İşin rakamları</h2>
+      <div class="alan"><label for="tutar">Teklif / sözleşme tutarı</label><div class="girdi"><input id="tutar" type="number" inputmode="decimal" min="0" step="any"><span>¤ · KDV hariç</span></div></div>
+      <div class="iki">
+        <div class="alan"><label for="malzeme">Malzeme ve dış alım</label><div class="girdi"><input id="malzeme" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div></div>
+        <div class="alan"><label for="taseron">Taşeron ve dış hizmet</label><div class="girdi"><input id="taseron" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div></div>
+      </div>
+      <div class="alan"><label for="diger">Diğer doğrudan giderler</label><div class="girdi"><input id="diger" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Nakliye, yol, konaklama, kiralık ekipman gibi bu işe özel harcamalar.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="saat">Ekibin bu işe harcadığı saat</label><div class="girdi"><input id="saat" type="number" inputmode="decimal" min="0" step="any"><span>saat</span></div><small>Bütün çalışanların toplamı.</small></div>
+        <div class="alan"><label for="saatMaliyet">Bir çalışma saatinin maliyeti</label><div class="girdi"><input id="saatMaliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤/saat</span></div><small>Bilmiyorsanız <a href="../../araclar/saat-maliyeti/" style="color:var(--accent)">saat maliyeti aracıyla</a> hesaplayın.</small></div>
+      </div>
+      <div class="alan"><label for="genel">Genel gider payı</label><div class="girdi"><input id="genel" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Kira, ofis, yönetim, araç gibi giderlerin cirodaki oranı.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Sonuç</h2>
+      <div class="buyuk">
+        <div class="kutu"><div class="ad">Görünen kâr<br>(yalnız faturalı giderler)</div><div class="deger" id="gorunen">–</div><div class="alt" id="gorunenMarj"></div></div>
+        <div class="kutu ana"><div class="ad">Gerçek kâr<br>(ekip saati ve genel gider dahil)</div><div class="deger" id="gercek">–</div><div class="alt" id="gercekMarj"></div></div>
+      </div>
+      <div class="serit" id="serit"></div>
+      <div class="lejant"><span><b style="background:#6366F1"></b>Malzeme</span><span><b style="background:#22D3EE"></b>Taşeron</span><span><b style="background:#94A3B8"></b>Diğer</span><span><b style="background:#F59E0B"></b>Ekip saati</span><span><b style="background:#A78BFA"></b>Genel gider</span><span><b style="background:#34D399"></b>Kâr</span></div>
+      <p class="yorum" id="pkYorum"></p>
+      <div class="satir"><span>Zarar etmeden çalışılabilecek en fazla saat</span><b id="basabas">–</b></div>
+      <div class="satir"><span>Bu işte çalışılan her saatin getirdiği</span><b id="saatKazanc">–</b></div>
+      <div class="satir"><span>İşçilik %20 uzarsa gerçek kâr</span><b id="sapma">–</b></div>
+      <p class="not">Hesap tarayıcınızda yapılır; siz göndermedikçe rakamlarınız hiçbir yere gitmez.</p>
+    </section>
+  </div>
+  <div class="indir"><p><strong>Bütün projelerinizi takip etmek için</strong>Proje başına bütçe ve gerçekleşen, saat ve gider kaydı, sapma uyarısı olan Excel şablonu.</p><a class="btn btn-cizgi" href="../../araclar/sablonlar/proje-karlilik-takibi-tr.xlsx" data-en-href="../../araclar/sablonlar/proje-karlilik-takibi-en.xlsx" download>Excel şablonunu indir</a></div>
+</div>
+
+<div id="metin" hidden><span data-k="marj">marj {m}</span><span data-k="saatDeger">{s} saat</span><span data-k="yok">hesaplanamaz</span><span data-k="yZarar">Bu iş zarar ediyor. Faturası gelen giderlere bakınca kârlı görünüyor; ekibin saati ve genel gider eklenince {f} fark çıkıyor ve kâr eksiye düşüyor.</span><span data-k="yInce">Kâr var ama ince: gerçek marj {m}. Görünen kârla aradaki {f} fark, ekip saati ve genel giderden geliyor. İşçilik biraz uzarsa kâr hızla erir.</span><span data-k="yIyi">Bu iş kâr bırakıyor, gerçek marj {m}. Yine de görünen kârla aradaki {f} fark, ekip saati yazılmadan bakılan hesabın ne kadar yanılttığını gösteriyor.</span></div>
+
+<section class="aciklama">
+  <h2>Hesap nasıl yapılıyor?</h2>
+  <p>Proje bazlı çalışan firmaların çoğu bir işin kârını teklif tutarından malzeme ve taşeron faturalarını düşerek hesaplar. Bu rakam yanıltıcıdır, çünkü işi yapan kendi ekibinizin saati ve firmayı ayakta tutan genel giderler faturayla gelmez.</p>
+  <ul>
+    <li><strong>Görünen kâr</strong> = teklif tutarı − malzeme − taşeron − diğer doğrudan giderler</li>
+    <li><strong>Gerçek kâr</strong> = görünen kâr − (çalışılan saat × saat maliyeti) − (teklif tutarı × genel gider payı)</li>
+    <li><strong>Zarar etmeden çalışılabilecek saat</strong>, ekip saati dışındaki bütün giderler düşüldükten sonra kalan tutarın saat maliyetine bölünmesiyle bulunur. İş bu saati aşarsa zarar başlar.</li>
+  </ul>
+  <p>En çok yanılan kalem saattir. Teklif verilirken öngörülen saat ile iş bittiğinde harcanan saat çoğu zaman aynı değildir ve bu fark ancak saatler işe yazılıyorsa görünür. Saatlerin her gün işe yazıldığı bir sistemde bu tablo iş bitmeden, iş sürerken izlenebilir. Ayrıntısı <a href="../../yazilar/proje-karliligi-olcme/">proje kârlılığı nasıl ölçülür</a> yazısında.</p>
+  <h2>Sık sorulan sorular</h2>
+<h3>Genel gider payını kaç yazmalıyım?</h3>
+<p>Geçen yılın kira, ofis personeli, araç, yazılım gibi projeye doğrudan yazılmayan giderlerini toplayıp yıllık cironuza bölün. Çıkan oran sizin genel gider payınızdır. Bilmiyorsanız %10–15 ile başlayıp sonucu bir de %20 ile deneyin.</p>
+<h3>Saat maliyetini nereden bulacağım?</h3>
+<p>Bir çalışanın size yıllık toplam maliyetini, yıl içinde gerçekten işe yazılabilen saate bölmeniz gerekir. <a href="../../araclar/saat-maliyeti/">Saat maliyeti aracı</a> bunu hesaplar ve sonucu buraya aktarır.</p>
+<h3>Görünen kâr ile gerçek kâr arasındaki fark neden bu kadar büyük?</h3>
+<p>Faturası gelen giderler (malzeme, taşeron, nakliye) kolay görülür. Kendi ekibinizin işe harcadığı saat ve firmanın genel giderleri ise faturayla gelmez, çoğu zaman hesaba hiç girmez. Fark tam olarak bu iki kalemdir.</p>
+<h3>Girdiğim rakamlar bir yere gönderiliyor mu?</h3>
+<p>Siz göndermedikçe hayır. Hesap tamamen tarayıcınızda yapılır ve kaydedilmez. Rakamlar yalnız “Sonucumu değerlendirin” formunu doldurup gönderirseniz, size dönebilmemiz için bize ulaşır.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>İşinizi kontrol altına alalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım; nerede zaman ve para kaybettiğinizi görelim.</p><a class="btn main" href="../../#iletisim">İletişim bilgileri</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>Web sitesi, SEO ve dijital pazarlama için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../araclar/arac.js"></script>
+</body>
+</html>

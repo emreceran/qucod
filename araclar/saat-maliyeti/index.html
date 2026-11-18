@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Çalışan saat maliyeti hesaplama (ücretsiz) · Qucod</title>
+<meta name="description" content="Ücretsiz hesaplayıcı: bir çalışanın saatlik gerçek maliyeti, işveren maliyeti, yan gider, izin ve işe yazılamayan zaman dahil. Örnek hesapla, 1 dakikada.">
+<meta property="og:title" content="Çalışan saat maliyeti hesaplama (ücretsiz)">
+<meta property="og:description" content="Ücretsiz hesaplayıcı: bir çalışanın saatlik gerçek maliyeti, işveren maliyeti, yan gider, izin ve işe yazılamayan zaman dahil. Örnek hesapla, 1 dakikada.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/saat-maliyeti/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/hourly-cost/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../araclar/">Araçlar</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a><a href="../../#iletisim">İletişim</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/tools/hourly-cost/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../araclar/">← Tüm araçlar</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Ücretsiz araç</div>
+  <h1>Çalışan saat maliyeti hesaplayıcı</h1>
+  <p class="lead">Teklif verirken ve bir işin kârını hesaplarken kullanmanız gereken saat maliyeti, maaşın ayın saatine bölünmesinden çıkan rakamdan yüksektir. Bu araç aradaki farkı gösterir.</p>
+  <div class="tgrid">
+    <form class="panel" id="sm" onsubmit="return false">
+      <h2>Bir çalışan için</h2>
+      <div class="alan"><label for="maliyet">Aylık işveren maliyeti</label><div class="girdi"><input id="maliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Bordrodaki "işverene toplam maliyet". Brüt maaş artı işveren primleri.</small></div>
+      <div class="alan"><label for="yan">Aylık yan giderler</label><div class="girdi"><input id="yan" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Yemek, yol, prim, iş kıyafeti, telefon, eğitim gibi bordro dışı harcamalar.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="maasSayisi">Yılda ödenen maaş sayısı</label><div class="girdi"><input id="maasSayisi" type="number" inputmode="decimal" min="0" step="1"><span>maaş</span></div><small>İkramiye varsa 13 ya da 14 yazın.</small></div>
+        <div class="alan"><label for="izin">Yıllık izin ve resmî tatil</label><div class="girdi"><input id="izin" type="number" inputmode="decimal" min="0" step="1"><span>gün</span></div><small>Çalışılmayan iş günleri toplamı.</small></div>
+      </div>
+      <div class="iki">
+        <div class="alan"><label for="haftaSaat">Haftalık çalışma</label><div class="girdi"><input id="haftaSaat" type="number" inputmode="decimal" min="0" step="any"><span>saat</span></div></div>
+        <div class="alan"><label for="haftaGun">Haftada çalışılan gün</label><div class="girdi"><input id="haftaGun" type="number" inputmode="decimal" min="0" step="1"><span>gün</span></div></div>
+      </div>
+      <div class="alan"><label for="verim">Verimli çalışma oranı</label><div class="girdi"><input id="verim" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Mesainin bir işe ya da müşteriye yazılabilen kısmı.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Sonuç</h2>
+      <div class="buyuk">
+        <div class="kutu"><div class="ad">Mesai saati başına maliyet</div><div class="deger" id="c1">–</div></div>
+        <div class="kutu ana"><div class="ad">İşe yazılan saat başına maliyet<br>(teklifte kullanın)</div><div class="deger" id="c2">–</div></div>
+      </div>
+      <p class="yorum" id="smYorum"></p>
+      <div class="satir"><span>Yıllık toplam maliyet</span><b id="yillik">–</b></div>
+      <div class="satir"><span>Yılda çalışılan mesai</span><b id="mesaiSaat">–</b></div>
+      <div class="satir"><span>Bunun işe yazılabilen kısmı</span><b id="verimliSaat">–</b></div>
+      <div class="satir"><span>Maaşı ayın saatine bölen kolay hesap</span><b id="kolay">–</b></div>
+      <p style="margin-top:18px"><a class="btn btn-primary" id="aktar" href="../../araclar/proje-karliligi/">Bu maliyetle proje kârlılığını hesapla →</a></p>
+      <p class="not">Hesap tarayıcınızda yapılır; siz göndermedikçe rakamlarınız hiçbir yere gitmez.</p>
+    </section>
+  </div>
+</div>
+
+<div id="metin" hidden><span data-k="saatDeger">{s} saat</span><span data-k="yFark">Maaşı ayın saatine bölen hesap {k} gösteriyor. İzin, tatil, yan gider ve işe yazılamayan zaman eklenince bir saatin gerçek maliyeti {g}, yani {f} daha fazla.</span></div>
+
+<section class="aciklama">
+  <h2>Hesap nasıl yapılıyor?</h2>
+  <ul>
+    <li><strong>Yıllık maliyet</strong> = aylık işveren maliyeti × yılda ödenen maaş sayısı + aylık yan giderler × 12</li>
+    <li><strong>Mesai saati</strong> = haftalık saat × 52 − izin ve tatil günlerinin saati</li>
+    <li><strong>İşe yazılan saat</strong> = mesai saati × verimli çalışma oranı</li>
+    <li><strong>Saat maliyeti</strong> = yıllık maliyet ÷ işe yazılan saat</li>
+  </ul>
+  <p>Teklif hazırlarken ve bir işin kârını hesaplarken kullanılması gereken rakam, işe yazılan saat başına maliyettir. Ekip bir yılda ne kadar saat çalıştığını değil, o saatin ne kadarının bir işe ya da müşteriye yazıldığını belirler. Kalan zamanın maliyeti de işlerden çıkmak zorundadır.</p>
+  <p>Bu oranı tahminle değil ölçerek bilmenin yolu, saatlerin her gün işe yazılmasıdır. Ayrıntısı <a href="../../yazilar/proje-karliligi-olcme/">proje kârlılığı nasıl ölçülür</a> yazısında.</p>
+  <h2>Sık sorulan sorular</h2>
+<h3>Bir çalışanın saat maliyeti nasıl hesaplanır?</h3>
+<p>Yıllık toplam maliyeti işe yazılan saate bölün. Örnek: aylık işveren maliyeti 40.000, yan gider 5.000, yılda 12 maaş → yıllık 540.000. Haftada 5 gün, 45 saat × 52 = 2.340 saatten 20 günlük izin ve tatil (20 × 9 = 180 saat) düşünce 2.160 mesai saati kalır; %75 verimle 1.620 saat işe yazılır. Saat maliyeti 540.000 ÷ 1.620 ≈ 333 olur. Maaşı ayın saatine bölen kolay hesap ise yalnızca 40.000 ÷ 195 ≈ 205 gösterir.</p>
+<h3>İşveren maliyetini nereden bulurum?</h3>
+<p>Bordroda çalışanın brüt maaşına işveren primleri ve diğer yasal yükler eklenmiş toplam bir tutar bulunur. Muhasebecinizden ya da bordro programınızdan "işverene toplam maliyet" satırını alın. Bilmiyorsanız brüt maaşın yaklaşık 1,2 katıyla başlayabilirsiniz.</p>
+<h3>Verimli çalışma oranı ne demek?</h3>
+<p>Mesai saatinin tamamı bir işe yazılamaz: toplantı, yol, bekleme, eğitim, ofis işleri. Sahada ve atölyede bu oran çoğu zaman %70–80, ofis ağırlıklı işlerde daha düşüktür. Saatlerinizi işe yazmıyorsanız %75 makul bir başlangıçtır.</p>
+<h3>Neden maaşı ayın saatine bölmek yetmiyor?</h3>
+<p>O hesap yan giderleri, izinleri, resmî tatilleri ve işe yazılamayan zamanı dışarıda bırakır. Sonuç olduğundan düşük çıkar; bu düşük rakamla verilen teklif, iş bittiğinde beklenenden az kâr bırakır.</p>
+<h3>Ekibin ortalamasını nasıl hesaplarım?</h3>
+<p>Ekibin toplam aylık işveren maliyetini ve toplam yan giderini kişi sayısına bölüp ortalama bir çalışan için hesaplayın. Ustalarla çıraklar arasında fark büyükse iki ayrı hesap yapın.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>İşinizi kontrol altına alalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım; nerede zaman ve para kaybettiğinizi görelim.</p><a class="btn main" href="../../#iletisim">İletişim bilgileri</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>Web sitesi, SEO ve dijital pazarlama için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../araclar/arac.js"></script>
+</body>
+</html>

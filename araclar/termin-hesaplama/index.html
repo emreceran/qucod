@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Üretim termin hesaplama: sipariş ne zaman biter? · Qucod</title>
+<meta name="description" content="Adet, saatlik üretim hızı, çalışma saati ve makinedeki bekleyen işi girin; siparişin bitiş gününü ve istenen termine yetişip yetişmediğini görün.">
+<meta property="og:title" content="Üretim termin hesaplama: sipariş ne zaman biter?">
+<meta property="og:description" content="Adet, saatlik üretim hızı, çalışma saati ve makinedeki bekleyen işi girin; siparişin bitiş gününü ve istenen termine yetişip yetişmediğini görün.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/termin-hesaplama/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/lead-time-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../araclar/">Araçlar</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a><a href="../../#iletisim">İletişim</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/tools/lead-time-calculator/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../araclar/">← Tüm araçlar</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Ücretsiz araç</div>
+  <h1>Üretim termin hesaplayıcı</h1>
+  <p class="lead">Müşteri "ne zaman teslim edersiniz?" diye sorduğunda tahminle değil hesapla cevap verin. Araç siparişin bitiş gününü ve istenen termine yetişip yetişmediğini gösterir.</p>
+  <div class="tgrid">
+    <form class="panel" id="tm" onsubmit="return false">
+      <h2>Sipariş ve makine</h2>
+      <div class="iki">
+        <div class="alan"><label for="adet">Sipariş adedi</label><div class="girdi"><input id="adet" type="number" inputmode="decimal" min="0" step="1"><span>adet</span></div></div>
+        <div class="alan"><label for="hiz">Saatlik üretim hızı</label><div class="girdi"><input id="hiz" type="number" inputmode="decimal" min="0" step="any"><span>adet/saat</span></div><small>Makinenin ya da hattın normal hızı.</small></div>
+      </div>
+      <div class="iki">
+        <div class="alan"><label for="gunSaat">Günlük çalışma süresi</label><div class="girdi"><input id="gunSaat" type="number" inputmode="decimal" min="0" step="any"><span>saat</span></div><small>İki vardiya ise 16 yazın.</small></div>
+        <div class="alan"><label for="haftaGun">Haftada çalışılan gün</label><div class="girdi"><input id="haftaGun" type="number" inputmode="decimal" min="0" step="1"><span>gün</span></div></div>
+      </div>
+      <div class="iki">
+        <div class="alan"><label for="verim">Verim oranı</label><div class="girdi"><input id="verim" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Duruş, ayar ve hata payı.</small></div>
+        <div class="alan"><label for="kurulum">Hazırlık ve ayar süresi</label><div class="girdi"><input id="kurulum" type="number" inputmode="decimal" min="0" step="any"><span>saat</span></div><small>Kalıp değişimi, ilk ürün onayı.</small></div>
+      </div>
+      <div class="alan"><label for="bekleyen">Makinede önünde bekleyen iş</label><div class="girdi"><input id="bekleyen" type="number" inputmode="decimal" min="0" step="any"><span>iş günü</span></div><small>Bu sipariş başlamadan bitmesi gereken işlerin süresi.</small></div>
+      <div class="alan"><label for="terminTarih">Müşterinin istediği termin</label><div class="girdi"><input id="terminTarih" type="date"></div></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Sonuç</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">Tahmini bitiş günü</div><div class="deger" id="bitis">–</div><div class="alt" id="bitisAlt"></div></div>
+        <div class="kutu"><div class="ad">Üretim süresi</div><div class="deger" id="sure">–</div><div class="alt" id="sureSaat"></div></div>
+      </div>
+      <p class="yorum" id="tmYorum"></p>
+      <div class="satir"><span>Üretime başlama günü</span><b id="baslama">–</b></div>
+      <div class="satir"><span>Bugünden istenen termine kalan</span><b id="kalan">–</b></div>
+      <div class="satir"><span>Termine yetişmek için gereken çalışma</span><b id="gerekSaat">–</b></div>
+      <div class="satir"><span>Verim %100 olsaydı bitiş</span><b id="tamVerim">–</b></div>
+      <p class="not">Resmî tatiller hesaba katılmaz. Hesap tarayıcınızda yapılır; siz göndermedikçe bilgileriniz hiçbir yere gitmez.</p>
+    </section>
+  </div>
+  <div class="indir"><p><strong>Bütün siparişleri makine sırasıyla planlamak için</strong>Makine başına kapasite, sipariş sırası, termin uyarısı, tatil günleri ve gün gün plan çizelgesi olan Excel şablonu.</p><a class="btn btn-cizgi" href="../../araclar/sablonlar/uretim-plani-kapasite-tr.xlsx" data-en-href="../../araclar/sablonlar/uretim-plani-kapasite-en.xlsx" download>Excel şablonunu indir</a></div>
+</div>
+
+<div id="metin" hidden><span data-k="gunDeger">{s} iş günü</span><span data-k="saatDeger">{s} saat</span><span data-k="saatGun">günde {s} saat</span><span data-k="yYetisir">Sipariş istenen termine yetişiyor; bitişle termin arasında {g} iş günü pay var.</span><span data-k="ySinir">Sipariş termine ancak yetişiyor, arada {g} iş günü pay var. Bir arıza ya da malzeme gecikmesi termini kaçırtır.</span><span data-k="yGec">Sipariş istenen termini {g} iş günü kaçırıyor. Yetişmesi için günde {s} saat çalışmak gerekiyor; ya da termini {t} olarak verin.</span><span data-k="yImkansiz">Sipariş istenen termini {g} iş günü kaçırıyor ve önündeki işler bitmeden başlayamıyor. Termini {t} olarak verin ya da sırayı değiştirin.</span><span data-k="yok">yetişmez</span></div>
+
+<section class="aciklama">
+  <h2>Hesap nasıl yapılıyor?</h2>
+  <ul>
+    <li><strong>Üretim süresi (saat)</strong> = adet ÷ (saatlik hız × verim oranı) + hazırlık süresi</li>
+    <li><strong>Üretim süresi (iş günü)</strong> = üretim saati ÷ günlük çalışma süresi, yukarı yuvarlanır</li>
+    <li><strong>Başlama günü</strong>, makinede bekleyen iş bittikten sonraki ilk iş günüdür. Bitiş günü, başlamadan itibaren üretim süresi kadar iş günü sayılarak bulunur.</li>
+  </ul>
+  <p>Tek bir siparişin terminini hesaplamak kolaydır. Zor olan, aynı makineyi paylaşan onlarca siparişin sırasını her değişiklikte yeniden hesaplamaktır. Acil bir iş araya girdiğinde arkadaki her siparişin bitiş günü kayar ve bu kayma ancak planın tamamı tek yerde tutuluyorsa görülür. Ayrıntısı <a href="../../yazilar/uretim-yonetimi-yazilimi/">üretim yönetimi yazılımı</a> yazısında.</p>
+  <h2>Sık sorulan sorular</h2>
+<h3>Verim oranına ne yazmalıyım?</h3>
+<p>Makinenin kâğıt üzerindeki hızıyla gerçekte çıkardığı adet arasındaki oran. Arıza, ayar, malzeme bekleme ve hatalı ürün bu oranı düşürür. Ölçmediyseniz %60–70 ile başlayın; <a href="../../araclar/oee-hesaplama/">OEE aracıyla</a> kendi oranınızı bulabilirsiniz.</p>
+<h3>Makinede bekleyen iş neden önemli?</h3>
+<p>Sipariş makineye bugün girmiyorsa bitiş günü de o kadar kayar. Termin verirken en sık atlanan kalem, önce bitmesi gereken işlerdir. Birkaç makineden geçen işlerde en uzun sırası olan makineyi esas alın.</p>
+<h3>Resmî tatiller hesaba katılıyor mu?</h3>
+<p>Hayır, yalnız hafta tatili katılıyor. Arada bayram ya da resmî tatil varsa o günleri "makinede bekleyen iş" alanına ekleyin. Excel şablonumuzda tatil listesi var.</p>
+<h3>Girdiğim rakamlar bir yere gönderiliyor mu?</h3>
+<p>Siz göndermedikçe hayır. Hesap tamamen tarayıcınızda yapılır ve kaydedilmez. Bilgiler yalnız “Sonucumu değerlendirin” formunu doldurup gönderirseniz, size dönebilmemiz için bize ulaşır.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>İşinizi kontrol altına alalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım; nerede zaman ve para kaybettiğinizi görelim.</p><a class="btn main" href="../../#iletisim">İletişim bilgileri</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>Web sitesi, SEO ve dijital pazarlama için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../araclar/arac.js"></script>
+</body>
+</html>

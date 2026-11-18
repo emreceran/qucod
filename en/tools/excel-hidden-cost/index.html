@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The hidden cost of running on Excel · Qucod</title>
+<meta name="description" content="Calculate what entering the same data over and over, building reports by hand and spreadsheet errors cost your business each year.">
+<meta property="og:title" content="The hidden cost of running on Excel">
+<meta property="og:description" content="Calculate what entering the same data over and over, building reports by hand and spreadsheet errors cost your business each year.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/excel-maliyeti/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/excel-hidden-cost/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+<link rel="stylesheet" href="../../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Sections"><a href="../../#services">Services</a><a href="../../tools/">Tools</a><a href="../../articles/">Articles</a><a href="../../clients/">Clients</a><a href="../../#contact">Contact</a></nav>
+    <div class="lang" aria-label="Language"><a href="../../../araclar/excel-maliyeti/" hreflang="tr" lang="tr">TR</a><span aria-current="true">EN</span></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../tools/">← All tools</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Free tool</div>
+  <h1>The hidden cost of running your business on Excel</h1>
+  <p class="lead">An Excel licence is cheap. What's expensive is entering the same information separately into several files, compiling reports by hand and the errors caused by files that don't match. This tool puts a number on that cost.</p>
+  <div class="tgrid">
+    <form class="panel" id="em" onsubmit="return false">
+      <h2>In your business today</h2>
+      <div class="alan"><label for="kisi">People who track work in files</label><div class="girdi"><input id="kisi" type="number" inputmode="decimal" min="0" step="1"><span>people</span></div><small>Those who run order, stock, production, project or accounting tracking in Excel and similar files.</small></div>
+      <div class="alan"><label for="tekrar">Re-entry and file searching per person</label><div class="girdi"><input id="tekrar" type="number" inputmode="decimal" min="0" step="any"><span>hours/week</span></div><small>Typing the same information a second time, copying, finding the latest file, double-checking figures.</small></div>
+      <div class="alan"><label for="rapor">Time spent preparing reports and tables</label><div class="girdi"><input id="rapor" type="number" inputmode="decimal" min="0" step="any"><span>hours/month</span></div><small>Month-end report, management summary, lists for customers or the bank. Total for the whole team.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="hata">Errors caused by files</label><div class="girdi"><input id="hata" type="number" inputmode="decimal" min="0" step="1"><span>per month</span></div><small>Wrong orders, missing materials, uninvoiced deliveries, missed deadlines.</small></div>
+        <div class="alan"><label for="hataMaliyet">Average cost of one error</label><div class="girdi"><input id="hataMaliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Repeat shipment, overtime, discount, lost profit.</small></div>
+      </div>
+      <div class="alan"><label for="saatMaliyet">Cost of one working hour</label><div class="girdi"><input id="saatMaliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤/hour</span></div><small>If you don't know it, work it out with the <a href="../../tools/hourly-cost/">hourly cost tool</a>.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Result</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">Annual hidden cost</div><div class="deger" id="yillikM">–</div><div class="alt" id="aylikM"></div></div>
+        <div class="kutu"><div class="ad">Time lost to files</div><div class="deger" id="kayipSaat">–</div><div class="alt" id="kayipKisi"></div></div>
+      </div>
+      <div class="serit" id="emSerit"></div>
+      <div class="lejant"><span><b style="background:#6366F1"></b>Re-entry and searching</span><span><b style="background:#22D3EE"></b>Manual reports</span><span><b style="background:#F87171"></b>Errors</span></div>
+      <p class="yorum" id="emYorum"></p>
+      <div class="satir"><span>Re-entry and file searching</span><b id="mTekrar">–</b></div>
+      <div class="satir"><span>Reports prepared by hand</span><b id="mRapor">–</b></div>
+      <div class="satir"><span>Errors caused by files</span><b id="mHata">–</b></div>
+      <p class="not">Based on 48 working weeks a year and 1,800 hours for a full-time employee. The calculation is done in your browser; your figures go nowhere unless you send them.</p>
+    </section>
+  </div>
+</div>
+
+<div id="metin" hidden><span data-k="ay">month</span><span data-k="saatDeger">{s} hours</span><span data-k="kisiDeger">{s} full-time employees</span><span data-k="yMaliyet">Running things on files costs you about {y} a year, and {b} of that goes on {k}. Your team spends {s} a year on files instead of actual work, which equals {c}.</span><span data-k="kTekrar">re-entering data and searching for files</span><span data-k="kRapor">reports prepared by hand</span><span data-k="kHata">errors</span></div>
+
+<section class="aciklama">
+  <h2>How is it calculated?</h2>
+  <ul>
+    <li><strong>Re-entry cost</strong> = number of people × weekly hours × 48 weeks × hourly cost</li>
+    <li><strong>Report cost</strong> = monthly report hours × 12 × hourly cost</li>
+    <li><strong>Error cost</strong> = errors per month × 12 × cost of one error</li>
+  </ul>
+  <p>None of these three items shows up on any line of the budget: they get lost in salaries, in overtime and in errors written off as "these things happen". That's why, when the cost of software is discussed, it is usually weighed against zero. The real comparison is between the cost of the software and the annual total in this table. More on this in the <a href="../../articles/excel-to-erp/">Excel to ERP</a> article.</p>
+  <h2>Frequently asked questions</h2>
+<h3>How do I estimate the weekly time spent re-entering data?</h3>
+<p>For one week, ask a few people on the team to note the time they spend typing the same information in a second place, looking for files or asking "which file is the latest?". In most companies it comes to 3–6 hours per person per week.</p>
+<h3>Which errors should I count?</h3>
+<p>Wrong or incomplete orders shipped, work stopped because of missing materials, deliveries never invoiced, quotes sent with the wrong price, missed deadlines. As the cost, enter the repeat shipment, the overtime, the discount given or the profit lost.</p>
+<h3>Does software make all of this cost go away?</h3>
+<p>Not all of it. But when information is entered once and read from the same record everywhere, most of the time spent on re-entry and manual reports disappears, along with most of the errors caused by files that don't match.</p>
+<h3>Are the numbers I enter sent anywhere?</h3>
+<p>Not unless you send them. The calculation is done entirely in your browser and nothing is saved. Your figures reach us only if you fill in and send the “Evaluate my result” form, so that we can get back to you.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>Let’s bring your business under control.</h2><p>We map the path of one of your orders together and see where time and money are lost.</p><a class="btn main" href="../../#contact">Contact details</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>For websites, SEO and digital marketing: <a href="https://vohdigital.com/en/" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../../araclar/arac.js"></script>
+</body>
+</html>

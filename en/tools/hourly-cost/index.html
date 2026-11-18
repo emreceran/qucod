@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Employee Cost Per Hour Calculator (Free) · Qucod</title>
+<meta name="description" content="Free calculator: the true hourly cost of an employee, incl. employer costs, extras, leave and non-billable time. Worked example, takes a minute.">
+<meta property="og:title" content="Employee Cost Per Hour Calculator (Free)">
+<meta property="og:description" content="Free calculator: the true hourly cost of an employee, incl. employer costs, extras, leave and non-billable time. Worked example, takes a minute.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/saat-maliyeti/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/hourly-cost/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+<link rel="stylesheet" href="../../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Sections"><a href="../../#services">Services</a><a href="../../tools/">Tools</a><a href="../../articles/">Articles</a><a href="../../clients/">Clients</a><a href="../../#contact">Contact</a></nav>
+    <div class="lang" aria-label="Language"><a href="../../../araclar/saat-maliyeti/" hreflang="tr" lang="tr">TR</a><span aria-current="true">EN</span></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../tools/">← All tools</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Free tool</div>
+  <h1>Employee hourly cost calculator</h1>
+  <p class="lead">The hourly cost you should use when quoting and working out a job's profit is higher than the salary divided by the hours in a month. This tool shows the difference.</p>
+  <div class="tgrid">
+    <form class="panel" id="sm" onsubmit="return false">
+      <h2>For one employee</h2>
+      <div class="alan"><label for="maliyet">Monthly employer cost</label><div class="girdi"><input id="maliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>The "total employer cost" on the payslip. Gross salary plus employer social contributions.</small></div>
+      <div class="alan"><label for="yan">Monthly extra costs</label><div class="girdi"><input id="yan" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Off-payroll spending such as meals, travel, bonuses, workwear, phone and training.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="maasSayisi">Salaries paid per year</label><div class="girdi"><input id="maasSayisi" type="number" inputmode="decimal" min="0" step="1"><span>salaries</span></div><small>If there are bonus salaries, enter 13 or 14.</small></div>
+        <div class="alan"><label for="izin">Annual leave and public holidays</label><div class="girdi"><input id="izin" type="number" inputmode="decimal" min="0" step="1"><span>days</span></div><small>Total working days not worked.</small></div>
+      </div>
+      <div class="iki">
+        <div class="alan"><label for="haftaSaat">Weekly working hours</label><div class="girdi"><input id="haftaSaat" type="number" inputmode="decimal" min="0" step="any"><span>hours</span></div></div>
+        <div class="alan"><label for="haftaGun">Working days per week</label><div class="girdi"><input id="haftaGun" type="number" inputmode="decimal" min="0" step="1"><span>days</span></div></div>
+      </div>
+      <div class="alan"><label for="verim">Productive time ratio</label><div class="girdi"><input id="verim" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>The share of paid time that can be billed to a job or customer.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Result</h2>
+      <div class="buyuk">
+        <div class="kutu"><div class="ad">Cost per paid hour</div><div class="deger" id="c1">–</div></div>
+        <div class="kutu ana"><div class="ad">Cost per billable hour<br>(use this in quotes)</div><div class="deger" id="c2">–</div></div>
+      </div>
+      <p class="yorum" id="smYorum"></p>
+      <div class="satir"><span>Total annual cost</span><b id="yillik">–</b></div>
+      <div class="satir"><span>Paid hours per year</span><b id="mesaiSaat">–</b></div>
+      <div class="satir"><span>Of which billable</span><b id="verimliSaat">–</b></div>
+      <div class="satir"><span>Simple salary ÷ monthly hours figure</span><b id="kolay">–</b></div>
+      <p style="margin-top:18px"><a class="btn btn-primary" id="aktar" href="../../tools/project-profitability/">Calculate project profitability with this cost →</a></p>
+      <p class="not">The calculation is done in your browser; your figures go nowhere unless you send them.</p>
+    </section>
+  </div>
+</div>
+
+<div id="metin" hidden><span data-k="saatDeger">{s} hours</span><span data-k="yFark">Dividing the salary by the hours in a month gives {k}. Once leave, holidays, extra costs and non-billable time are added, the real cost of an hour is {g}, which is {f} more.</span></div>
+
+<section class="aciklama">
+  <h2>How is it calculated?</h2>
+  <ul>
+    <li><strong>Annual cost</strong> = monthly employer cost × salaries paid per year + monthly extra costs × 12</li>
+    <li><strong>Paid hours</strong> = weekly hours × 52 − hours of leave and holiday days</li>
+    <li><strong>Billable hours</strong> = paid hours × productive time ratio</li>
+    <li><strong>Hourly cost</strong> = annual cost ÷ billable hours</li>
+  </ul>
+  <p>The figure to use when quoting and working out a job's profit is the cost per billable hour. What matters is not how many hours the team works in a year, but how many of those hours are billed to a job or customer. The cost of the rest of the time has to be covered by the jobs too.</p>
+  <p>The way to know this ratio by measuring rather than guessing is to log hours against jobs every day. More on this in the article <a href="../../articles/measuring-project-profitability/">how to measure project profitability</a>.</p>
+  <h2>Frequently asked questions</h2>
+<h3>How do you calculate an employee's cost per hour?</h3>
+<p>Divide the total annual cost by the billable hours. Example: monthly employer cost 40,000, extras 5,000, 12 salaries a year → 540,000 a year. 5 days and 45 hours a week × 52 = 2,340 hours, minus 20 days of leave and holidays (20 × 9 = 180 hours) leaves 2,160 working hours; at 75% productivity, 1,620 hours are billable. The cost per hour is 540,000 ÷ 1,620 ≈ 333. The quick method of dividing salary by monthly hours shows only 40,000 ÷ 195 ≈ 205.</p>
+<h3>Where do I find the employer cost?</h3>
+<p>The payslip shows a total: the employee's gross salary plus employer social contributions and other statutory charges. Get the "total employer cost" line from your accountant or payroll software. If you don't know it, you can start with roughly 1.2 times the gross salary.</p>
+<h3>What does productive time ratio mean?</h3>
+<p>Not every paid hour can be billed to a job: meetings, travel, waiting, training, admin. In the field and in the workshop this ratio is usually 70–80%, and lower for office-heavy work. If you don't log your hours against jobs, 75% is a reasonable starting point.</p>
+<h3>Why isn't dividing the salary by the hours in a month enough?</h3>
+<p>That calculation leaves out extra costs, leave, public holidays and non-billable time. The result comes out too low, and a quote based on that low figure leaves less profit than expected when the job is done.</p>
+<h3>How do I calculate the team average?</h3>
+<p>Divide the team's total monthly employer cost and total extra costs by the number of people and calculate for an average employee. If there's a big difference between skilled workers and apprentices, do two separate calculations.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>Let’s bring your business under control.</h2><p>We map the path of one of your orders together and see where time and money are lost.</p><a class="btn main" href="../../#contact">Contact details</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>For websites, SEO and digital marketing: <a href="https://vohdigital.com/en/" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../../araclar/arac.js"></script>
+</body>
+</html>

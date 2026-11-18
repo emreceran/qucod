@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teklif fiyatı ve kâr marjı hesaplama · Qucod</title>
+<meta name="description" content="Maliyet ve hedef marjdan doğru satış fiyatı: maliyete yüzde eklemekle marj arasındaki fark, iskontonun kârdan götürdüğü ve telafi için gereken satış.">
+<meta property="og:title" content="Teklif fiyatı ve kâr marjı hesaplama">
+<meta property="og:description" content="Maliyet ve hedef marjdan doğru satış fiyatı: maliyete yüzde eklemekle marj arasındaki fark, iskontonun kârdan götürdüğü ve telafi için gereken satış.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/teklif-fiyati/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/quote-pricing/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../araclar/">Araçlar</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a><a href="../../#iletisim">İletişim</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/tools/quote-pricing/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../araclar/">← Tüm araçlar</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Ücretsiz araç</div>
+  <h1>Teklif fiyatı ve marj hesaplayıcı</h1>
+  <p class="lead">Maliyetinizi ve hedeflediğiniz kâr marjını girin. Araç doğru satış fiyatını, maliyete yüzde eklemenin nerede yanılttığını ve iskontonun kârdan ne götürdüğünü gösterir.</p>
+  <div class="tgrid">
+    <form class="panel" id="tf" onsubmit="return false">
+      <h2>Ürün ya da iş</h2>
+      <div class="alan"><label for="maliyet">Toplam maliyet</label><div class="girdi"><input id="maliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Malzeme, işçilik, taşeron, nakliye ve genel gider payı dahil. Bir ürün için birim, bir iş için toplam maliyet.</small></div>
+      <div class="alan"><label for="hedefMarj">Hedeflenen kâr marjı</label><div class="girdi"><input id="hedefMarj" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Kârın satış fiyatına oranı.</small></div>
+      <div class="alan"><label for="iskonto">Müşteriye verilecek iskonto</label><div class="girdi"><input id="iskonto" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Pazarlıkta ya da kampanyada fiyattan düşülen oran. Yoksa 0 yazın.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Sonuç</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">Hedef marj için satış fiyatı</div><div class="deger" id="dogruFiyat">–</div><div class="alt" id="dogruMarj"></div></div>
+        <div class="kutu"><div class="ad">İskonto sonrası fiyat</div><div class="deger" id="iskFiyat">–</div><div class="alt" id="iskMarj"></div></div>
+      </div>
+      <p class="yorum" id="tfYorum"></p>
+      <div class="satir"><span>Maliyete aynı yüzdeyi ekleyince çıkan fiyat</span><b id="ekleFiyat">–</b></div>
+      <div class="satir"><span>Bu fiyatla gerçekleşen marj</span><b id="ekleMarj">–</b></div>
+      <div class="satir"><span>Hedef marj için maliyete eklenmesi gereken oran</span><b id="gerekEkle">–</b></div>
+      <div class="satir"><span>İskonto öncesi / sonrası birim kâr</span><b id="birimKar">–</b></div>
+      <div class="satir"><span>İskontoyu telafi için gereken ek satış</span><b id="telafi">–</b></div>
+      <p class="not">Hesap tarayıcınızda yapılır; siz göndermedikçe rakamlarınız hiçbir yere gitmez.</p>
+    </section>
+  </div>
+  <div class="indir"><p><strong>Tekliflerinizi tek dosyada hazırlamak için</strong>Ürün listesinden fiyat çeken teklif formu, satır satır marj kontrolü ve kazanılan / kaybedilen teklif kaydı.</p><a class="btn btn-cizgi" href="../../araclar/sablonlar/teklif-hazirlama-tr.xlsx" data-en-href="../../araclar/sablonlar/teklif-hazirlama-en.xlsx" download>Excel şablonunu indir</a></div>
+</div>
+
+<div id="metin" hidden><span data-k="marj">marj {m}</span><span data-k="yEkle">Maliyete {h} eklerseniz fiyat {e} olur ama marjınız {h} değil {g} çıkar. Hedeflediğiniz marj için fiyat {f} olmalı; her satışta {k} eksik kalıyor.</span><span data-k="yIsk"> {i} iskonto verildiğinde marj {s} düşüyor. Aynı toplam kârı korumak için {a} daha fazla satmanız gerekir.</span><span data-k="yIskZarar"> {i} iskonto verildiğinde fiyat maliyetin altına iniyor: bu iskontoyla her satış zarar eder.</span><span data-k="yok">telafi edilemez</span></div>
+
+<section class="aciklama">
+  <h2>Hesap nasıl yapılıyor?</h2>
+  <ul>
+    <li><strong>Hedef marj için fiyat</strong> = maliyet ÷ (1 − hedef marj)</li>
+    <li><strong>Maliyete ekleyerek bulunan fiyat</strong> = maliyet × (1 + oran). Bu fiyatın marjı her zaman eklenen orandan düşüktür.</li>
+    <li><strong>İskonto sonrası marj</strong> = 1 − maliyet ÷ (fiyat × (1 − iskonto))</li>
+    <li><strong>Telafi için gereken ek satış</strong> = iskonto öncesi birim kâr ÷ iskonto sonrası birim kâr − 1</li>
+  </ul>
+  <h3>Marj ve maliyete ekleme oranı karşılığı</h3>
+  <table class="tablo">
+    <tr><th>İstenen marj</th><th>Maliyete eklenmesi gereken</th></tr>
+    <tr><td>%10</td><td>%11,1</td></tr>
+    <tr><td>%15</td><td>%17,6</td></tr>
+    <tr><td>%20</td><td>%25</td></tr>
+    <tr><td>%25</td><td>%33,3</td></tr>
+    <tr><td>%30</td><td>%42,9</td></tr>
+    <tr><td>%40</td><td>%66,7</td></tr>
+  </table>
+  <p>Teklifte en sık yapılan hata, marj hedefini maliyete eklenen yüzde gibi kullanmaktır. İkinci hata, maliyete işçilik saatini ve genel gideri katmamaktır. İkisi birleşince yıl sonunda hedeflenen kârın çok altında bir tablo çıkar. Teklif hazırlarken fiyat ve maliyet aynı yerden geliyorsa her satırın marjı teklif gitmeden görülür. Ayrıntısı <a href="../../yazilar/teklif-sureci/">teklif sürecinde kaybolan zaman ve kâr</a> yazısında.</p>
+  <h2>Sık sorulan sorular</h2>
+<h3>Kâr marjı ile maliyete ekleme oranı aynı şey değil mi?</h3>
+<p>Değil. Marj, kârın satış fiyatına oranıdır; ekleme oranı (kâr payı) kârın maliyete oranıdır. 100 maliyetli bir ürüne %25 eklerseniz 125’e satarsınız, ama marjınız %20 olur. %25 marj için fiyatın 133,3 olması gerekir.</p>
+<h3>Maliyete neleri katmalıyım?</h3>
+<p>Malzemenin yanında işçilik saatini, varsa taşeron ve nakliyeyi, ürüne ya da işe düşen genel gider payını da katın. İşçilik için <a href="../../araclar/saat-maliyeti/">saat maliyeti aracını</a> kullanabilirsiniz. Eksik maliyetle hesaplanan fiyat ne kadar doğru formülle bulunursa bulunsun düşük çıkar.</p>
+<h3>%10 iskonto neden kârın yarısını götürebiliyor?</h3>
+<p>İskonto fiyattan düşer ama maliyet yerinde kalır. Bu yüzden indirimin tamamı kârdan çıkar. Marj %25 iken verilen %10 iskonto, birim kârı üçte birden fazla azaltır; aynı toplam kârı korumak için çok daha fazla satmanız gerekir.</p>
+<h3>Girdiğim rakamlar bir yere gönderiliyor mu?</h3>
+<p>Siz göndermedikçe hayır. Hesap tamamen tarayıcınızda yapılır ve kaydedilmez. Rakamlar yalnız “Sonucumu değerlendirin” formunu doldurup gönderirseniz, size dönebilmemiz için bize ulaşır.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>İşinizi kontrol altına alalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım; nerede zaman ve para kaybettiğinizi görelim.</p><a class="btn main" href="../../#iletisim">İletişim bilgileri</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>Web sitesi, SEO ve dijital pazarlama için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../araclar/arac.js"></script>
+</body>
+</html>

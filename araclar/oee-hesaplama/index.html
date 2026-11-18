@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OEE hesaplama: makine verimliliği · Qucod</title>
+<meta name="description" content="Planlı süre, duruş, çevrim süresi ve üretilen adetten OEE: kullanılabilirlik, performans ve kalite oranı, kaybın nereden geldiği ve kaybolan adet.">
+<meta property="og:title" content="OEE hesaplama: makine verimliliği">
+<meta property="og:description" content="Planlı süre, duruş, çevrim süresi ve üretilen adetten OEE: kullanılabilirlik, performans ve kalite oranı, kaybın nereden geldiği ve kaybolan adet.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/oee-hesaplama/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/oee-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../araclar/">Araçlar</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a><a href="../../#iletisim">İletişim</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/tools/oee-calculator/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../araclar/">← Tüm araçlar</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Ücretsiz araç</div>
+  <h1>OEE hesaplayıcı</h1>
+  <p class="lead">Bir makinenin ya da hattın bir vardiyadaki rakamlarını girin. Araç OEE'yi (toplam ekipman etkinliği) üç parçasıyla hesaplar ve kaybın en çok nereden geldiğini gösterir.</p>
+  <div class="tgrid">
+    <form class="panel" id="oe" onsubmit="return false">
+      <h2>Bir vardiya ya da gün</h2>
+      <div class="alan"><label for="planli">Planlı üretim süresi</label><div class="girdi"><input id="planli" type="number" inputmode="decimal" min="0" step="any"><span>dakika</span></div><small>Vardiya süresinden molalar ve planlı bakım çıkarılmış hali.</small></div>
+      <div class="alan"><label for="durus">Plansız duruşlar</label><div class="girdi"><input id="durus" type="number" inputmode="decimal" min="0" step="any"><span>dakika</span></div><small>Arıza, ayar, kalıp değişimi, malzeme ya da operatör bekleme.</small></div>
+      <div class="alan"><label for="cevrim">İdeal çevrim süresi</label><div class="girdi"><input id="cevrim" type="number" inputmode="decimal" min="0" step="any"><span>saniye/adet</span></div><small>Makinenin aksamadan bir ürün çıkardığı süre.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="uretilen">Toplam üretilen</label><div class="girdi"><input id="uretilen" type="number" inputmode="decimal" min="0" step="1"><span>adet</span></div><small>Hatalılar dahil.</small></div>
+        <div class="alan"><label for="hatali">Hatalı ya da yeniden işlenen</label><div class="girdi"><input id="hatali" type="number" inputmode="decimal" min="0" step="1"><span>adet</span></div></div>
+      </div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Sonuç</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">OEE</div><div class="deger" id="oeeDeger">–</div><div class="alt" id="oeeAlt"></div></div>
+        <div class="kutu"><div class="ad">Kaybolan üretim</div><div class="deger" id="kayipAdet">–</div><div class="alt" id="kayipAlt"></div></div>
+      </div>
+      <div class="cubuklar">
+        <div><span>Kullanılabilirlik</span><i><b id="cA"></b></i><em id="vA">–</em></div>
+        <div><span>Performans</span><i><b id="cP"></b></i><em id="vP">–</em></div>
+        <div><span>Kalite</span><i><b id="cQ"></b></i><em id="vQ">–</em></div>
+      </div>
+      <p class="yorum" id="oeYorum"></p>
+      <div class="satir"><span>Duruşlarla kaybolan süre</span><b id="kDurus">–</b></div>
+      <div class="satir"><span>Yavaş çalışmayla kaybolan süre</span><b id="kHiz">–</b></div>
+      <div class="satir"><span>Hatalı ürüne giden süre</span><b id="kKalite">–</b></div>
+      <div class="satir"><span>OEE %85 olsaydı ek iyi ürün</span><b id="ek85">–</b></div>
+      <p class="not">Hesap tarayıcınızda yapılır; siz göndermedikçe rakamlarınız hiçbir yere gitmez.</p>
+    </section>
+  </div>
+</div>
+
+<div id="metin" hidden><span data-k="dk">{s} dk</span><span data-k="adetDeger">{s} adet</span><span data-k="kDurus">duruşlar</span><span data-k="kHiz">yavaş çalışma</span><span data-k="kKalite">hatalı ürün</span><span data-k="yDunya">OEE {o}: dünya ölçeğinde iyi kabul edilen seviyedesiniz. Kalan kaybın en büyük kısmı {k} kaynaklı.</span><span data-k="yOrta">OEE {o}. Makine planlı sürede çıkarabileceğinin {o} kadarını iyi ürün olarak çıkarıyor. En büyük kayıp {k}: {d} dakika. Önce buna bakın.</span><span data-k="yDusuk">OEE {o}: makine kapasitesinin yarısından fazlası kayboluyor. En büyük kayıp {k}: {d} dakika. Duruşlar nedenleriyle kaydedilmiyorsa ilk adım bu olmalı.</span><span data-k="yHata">Performans %100’ün üstünde çıkıyor: ideal çevrim süresi gerçekte olduğundan uzun yazılmış ya da üretilen adet fazla. Değerleri kontrol edin.</span></div>
+
+<section class="aciklama">
+  <h2>Hesap nasıl yapılıyor?</h2>
+  <ul>
+    <li><strong>Kullanılabilirlik</strong> = (planlı süre − duruşlar) ÷ planlı süre</li>
+    <li><strong>Performans</strong> = (ideal çevrim süresi × üretilen adet) ÷ çalışılan süre</li>
+    <li><strong>Kalite</strong> = (üretilen − hatalı) ÷ üretilen</li>
+    <li><strong>OEE</strong> = kullanılabilirlik × performans × kalite. Planlı sürede çıkabilecek en fazla adetin ne kadarının iyi ürün olarak çıktığını gösterir.</li>
+  </ul>
+  <p>OEE'yi bir kez hesaplamak işin kolay kısmıdır. Faydası, her gün ve her makine için ölçülüp duruşların nedenleriyle kaydedilmesinde ortaya çıkar. Kâğıda ya da Excel'e gün sonunda yazılan duruşlar hem eksik hem geç kalır. Operatörün duruşu anında tabletten seçtiği bir düzende hangi arızanın, hangi kalıbın ya da hangi malzeme beklemesinin ayda kaç saat götürdüğü kendiliğinden çıkar. Ayrıntısı <a href="../../yazilar/uretim-yonetimi-yazilimi/">üretim yönetimi yazılımı</a> yazısında.</p>
+  <h2>Sık sorulan sorular</h2>
+<h3>İyi bir OEE kaç olmalı?</h3>
+<p>Dünya ölçeğinde iyi kabul edilen değer %85 civarıdır. Ölçmeye yeni başlayan işletmelerde %40–60 arası sık görülür. Asıl önemli olan rakamın kendisinden çok, kaybın üç kalemden hangisinde toplandığı ve haftadan haftaya nasıl değiştiğidir.</p>
+<h3>İdeal çevrim süresini nereden bulurum?</h3>
+<p>Makinenin ya da kalıbın hiç aksamadan bir ürünü çıkardığı süre. Makine kataloğundaki değeri ya da sizin gördüğünüz en iyi sürekli hızı kullanın. Performans %100’ün üstünde çıkıyorsa yazdığınız çevrim süresi gerçekten uzundur.</p>
+<h3>Planlı süreye molalar dahil mi?</h3>
+<p>Hayır. Vardiya süresinden yemek, çay molası ve planlı bakım gibi zaten çalışılmayacağı bilinen süreleri çıkarın. Arıza, ayar, kalıp değişimi ve malzeme beklemesi ise duruş olarak yazılır.</p>
+<h3>Girdiğim rakamlar bir yere gönderiliyor mu?</h3>
+<p>Siz göndermedikçe hayır. Hesap tamamen tarayıcınızda yapılır ve kaydedilmez. Rakamlar yalnız “Sonucumu değerlendirin” formunu doldurup gönderirseniz, size dönebilmemiz için bize ulaşır.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>İşinizi kontrol altına alalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım; nerede zaman ve para kaybettiğinizi görelim.</p><a class="btn main" href="../../#iletisim">İletişim bilgileri</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>Web sitesi, SEO ve dijital pazarlama için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../araclar/arac.js"></script>
+</body>
+</html>

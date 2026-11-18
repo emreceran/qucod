@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Production lead time: when will it be done? · Qucod</title>
+<meta name="description" content="Enter quantity, output per hour, working hours and work queued on the machine; see when the order will be done and whether it meets the due date.">
+<meta property="og:title" content="Production lead time: when will it be done?">
+<meta property="og:description" content="Enter quantity, output per hour, working hours and work queued on the machine; see when the order will be done and whether it meets the due date.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/termin-hesaplama/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/lead-time-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+<link rel="stylesheet" href="../../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Sections"><a href="../../#services">Services</a><a href="../../tools/">Tools</a><a href="../../articles/">Articles</a><a href="../../clients/">Clients</a><a href="../../#contact">Contact</a></nav>
+    <div class="lang" aria-label="Language"><a href="../../../araclar/termin-hesaplama/" hreflang="tr" lang="tr">TR</a><span aria-current="true">EN</span></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../tools/">← All tools</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Free tool</div>
+  <h1>Production lead time calculator</h1>
+  <p class="lead">When a customer asks "when can you deliver?", answer with a calculation, not a guess. The tool shows when the order will be finished and whether it meets the requested date.</p>
+  <div class="tgrid">
+    <form class="panel" id="tm" onsubmit="return false">
+      <h2>Order and machine</h2>
+      <div class="iki">
+        <div class="alan"><label for="adet">Order quantity</label><div class="girdi"><input id="adet" type="number" inputmode="decimal" min="0" step="1"><span>units</span></div></div>
+        <div class="alan"><label for="hiz">Output per hour</label><div class="girdi"><input id="hiz" type="number" inputmode="decimal" min="0" step="any"><span>units/hour</span></div><small>The normal speed of the machine or line.</small></div>
+      </div>
+      <div class="iki">
+        <div class="alan"><label for="gunSaat">Working hours per day</label><div class="girdi"><input id="gunSaat" type="number" inputmode="decimal" min="0" step="any"><span>hours</span></div><small>Enter 16 for two shifts.</small></div>
+        <div class="alan"><label for="haftaGun">Working days per week</label><div class="girdi"><input id="haftaGun" type="number" inputmode="decimal" min="0" step="1"><span>days</span></div></div>
+      </div>
+      <div class="iki">
+        <div class="alan"><label for="verim">Efficiency rate</label><div class="girdi"><input id="verim" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Allowance for downtime, setups and defects.</small></div>
+        <div class="alan"><label for="kurulum">Preparation and setup time</label><div class="girdi"><input id="kurulum" type="number" inputmode="decimal" min="0" step="any"><span>hours</span></div><small>Mould change, first-article approval.</small></div>
+      </div>
+      <div class="alan"><label for="bekleyen">Work queued ahead on the machine</label><div class="girdi"><input id="bekleyen" type="number" inputmode="decimal" min="0" step="any"><span>working days</span></div><small>Time for the jobs that must be finished before this order can start.</small></div>
+      <div class="alan"><label for="terminTarih">Customer's requested date</label><div class="girdi"><input id="terminTarih" type="date"></div></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Result</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">Estimated finish date</div><div class="deger" id="bitis">–</div><div class="alt" id="bitisAlt"></div></div>
+        <div class="kutu"><div class="ad">Production time</div><div class="deger" id="sure">–</div><div class="alt" id="sureSaat"></div></div>
+      </div>
+      <p class="yorum" id="tmYorum"></p>
+      <div class="satir"><span>Production start date</span><b id="baslama">–</b></div>
+      <div class="satir"><span>Left from today to the requested date</span><b id="kalan">–</b></div>
+      <div class="satir"><span>Work needed to meet the date</span><b id="gerekSaat">–</b></div>
+      <div class="satir"><span>Finish at 100% efficiency</span><b id="tamVerim">–</b></div>
+      <p class="not">Public holidays are not taken into account. The calculation is done in your browser; your details go nowhere unless you send them.</p>
+    </section>
+  </div>
+  <div class="indir"><p><strong>To plan all orders in machine sequence</strong>An Excel template with capacity per machine, order sequence, deadline alerts, holidays and a day-by-day schedule.</p><a class="btn btn-cizgi" href="../../../araclar/sablonlar/uretim-plani-kapasite-tr.xlsx" data-en-href="../../../araclar/sablonlar/uretim-plani-kapasite-en.xlsx" download>Download the Excel template</a></div>
+</div>
+
+<div id="metin" hidden><span data-k="gunDeger">{s} working days</span><span data-k="saatDeger">{s} hours</span><span data-k="saatGun">{s} hours a day</span><span data-k="yYetisir">The order meets the requested date, with {g} working days to spare between finish and due date.</span><span data-k="ySinir">The order only just meets the due date, with {g} working days to spare. One breakdown or late material delivery and the date is missed.</span><span data-k="yGec">The order misses the requested date by {g} working days. To make it you'd have to work {s} hours a day, or promise {t} as the date instead.</span><span data-k="yImkansiz">The order misses the requested date by {g} working days and can't start until the work ahead of it is done. Promise {t} as the date instead, or change the sequence.</span><span data-k="yok">won't make it</span></div>
+
+<section class="aciklama">
+  <h2>How is it calculated?</h2>
+  <ul>
+    <li><strong>Production time (hours)</strong> = quantity ÷ (output per hour × efficiency rate) + setup time</li>
+    <li><strong>Production time (working days)</strong> = production hours ÷ working hours per day, rounded up</li>
+    <li><strong>The start date</strong> is the first working day after the work queued on the machine is done. The finish date is found by counting the production time in working days from the start.</li>
+  </ul>
+  <p>Working out the due date for a single order is easy. The hard part is recalculating the sequence of dozens of orders sharing the same machine every time something changes. When a rush job comes in, the finish date of every order behind it slips, and you only see that if the whole plan is kept in one place. More on this in the <a href="../../articles/production-management-software/">production management software</a> article.</p>
+  <h2>Frequently asked questions</h2>
+<h3>What should I enter as the efficiency rate?</h3>
+<p>The ratio between the machine's rated speed and what it actually turns out. Breakdowns, setups, waiting for materials and defects lower this rate. If you haven't measured it, start with 60–70%; you can find your own rate with the <a href="../../tools/oee-calculator/">OEE tool</a>.</p>
+<h3>Why does work queued on the machine matter?</h3>
+<p>If the order doesn't go on the machine today, the finish date slips by that much too. The item most often forgotten when promising a date is the work that has to be finished first. For jobs that go through several machines, go by the machine with the longest queue.</p>
+<h3>Are public holidays taken into account?</h3>
+<p>No, only weekends are. If there are public holidays in between, add those days to the "work queued on the machine" field. Our Excel template has a holiday list.</p>
+<h3>Are the numbers I enter sent anywhere?</h3>
+<p>Not unless you send it. The calculation is done entirely in your browser and nothing is saved. Your details reach us only if you fill in and send the “Evaluate my result” form, so that we can get back to you.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>Let’s bring your business under control.</h2><p>We map the path of one of your orders together and see where time and money are lost.</p><a class="btn main" href="../../#contact">Contact details</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>For websites, SEO and digital marketing: <a href="https://vohdigital.com/en/" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../../araclar/arac.js"></script>
+</body>
+</html>

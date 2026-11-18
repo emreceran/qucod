@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Excel ile iş takibinin gizli maliyeti · Qucod</title>
+<meta name="description" content="Aynı bilgiyi tekrar tekrar girmenin, elle rapor hazırlamanın ve dosya kaynaklı hataların işletmenize yıllık maliyetini hesaplayın.">
+<meta property="og:title" content="Excel ile iş takibinin gizli maliyeti">
+<meta property="og:description" content="Aynı bilgiyi tekrar tekrar girmenin, elle rapor hazırlamanın ve dosya kaynaklı hataların işletmenize yıllık maliyetini hesaplayın.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/excel-maliyeti/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/excel-hidden-cost/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Bölümler"><a href="../../#hizmetler">Hizmetler</a><a href="../../araclar/">Araçlar</a><a href="../../yazilar/">Yazılar</a><a href="../../referanslar/">Referanslar</a><a href="../../#iletisim">İletişim</a></nav>
+    <div class="lang" aria-label="Dil"><span aria-current="true">TR</span><a href="../../en/tools/excel-hidden-cost/" hreflang="en" lang="en">EN</a></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../araclar/">← Tüm araçlar</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Ücretsiz araç</div>
+  <h1>Excel ile iş takibinin gizli maliyeti</h1>
+  <p class="lead">Excel'in lisansı ucuzdur; pahalı olan, aynı bilginin birkaç dosyaya ayrı ayrı girilmesi, raporların elle derlenmesi ve dosyalar arası tutarsızlıktan doğan hatalardır. Bu araç o maliyeti rakama döker.</p>
+  <div class="tgrid">
+    <form class="panel" id="em" onsubmit="return false">
+      <h2>İşletmenizde bugün</h2>
+      <div class="alan"><label for="kisi">Takibi dosyalarla yapan kişi sayısı</label><div class="girdi"><input id="kisi" type="number" inputmode="decimal" min="0" step="1"><span>kişi</span></div><small>Sipariş, stok, üretim, proje ya da muhasebe takibini Excel ve benzeri dosyalarla yürütenler.</small></div>
+      <div class="alan"><label for="tekrar">Kişi başı tekrar giriş ve dosya arama</label><div class="girdi"><input id="tekrar" type="number" inputmode="decimal" min="0" step="any"><span>saat/hafta</span></div><small>Aynı bilgiyi ikinci kez yazmak, kopyalamak, güncel dosyayı bulmak, rakam teyit etmek.</small></div>
+      <div class="alan"><label for="rapor">Rapor ve tablo hazırlamaya giden süre</label><div class="girdi"><input id="rapor" type="number" inputmode="decimal" min="0" step="any"><span>saat/ay</span></div><small>Ay sonu raporu, yönetim tablosu, müşteriye ya da bankaya giden listeler. Bütün ekip toplamı.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="hata">Dosya kaynaklı hata</label><div class="girdi"><input id="hata" type="number" inputmode="decimal" min="0" step="1"><span>adet/ay</span></div><small>Yanlış sipariş, eksik malzeme, kesilmeyen fatura, kaçan termin.</small></div>
+        <div class="alan"><label for="hataMaliyet">Bir hatanın ortalama maliyeti</label><div class="girdi"><input id="hataMaliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Tekrar sevkiyat, fazla mesai, indirim, kaybedilen kâr.</small></div>
+      </div>
+      <div class="alan"><label for="saatMaliyet">Bir çalışma saatinin maliyeti</label><div class="girdi"><input id="saatMaliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤/saat</span></div><small>Bilmiyorsanız <a href="../../araclar/saat-maliyeti/">saat maliyeti aracıyla</a> hesaplayın.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Sonuç</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">Yıllık gizli maliyet</div><div class="deger" id="yillikM">–</div><div class="alt" id="aylikM"></div></div>
+        <div class="kutu"><div class="ad">Dosyaya giden zaman</div><div class="deger" id="kayipSaat">–</div><div class="alt" id="kayipKisi"></div></div>
+      </div>
+      <div class="serit" id="emSerit"></div>
+      <div class="lejant"><span><b style="background:#6366F1"></b>Tekrar giriş ve arama</span><span><b style="background:#22D3EE"></b>Elle rapor</span><span><b style="background:#F87171"></b>Hatalar</span></div>
+      <p class="yorum" id="emYorum"></p>
+      <div class="satir"><span>Tekrar giriş ve dosya arama</span><b id="mTekrar">–</b></div>
+      <div class="satir"><span>Elle hazırlanan raporlar</span><b id="mRapor">–</b></div>
+      <div class="satir"><span>Dosya kaynaklı hatalar</span><b id="mHata">–</b></div>
+      <p class="not">Yılda 48 çalışma haftası ve tam zamanlı bir çalışan için 1.800 saat esas alınır. Hesap tarayıcınızda yapılır; siz göndermedikçe rakamlarınız hiçbir yere gitmez.</p>
+    </section>
+  </div>
+</div>
+
+<div id="metin" hidden><span data-k="ay">ay</span><span data-k="saatDeger">{s} saat</span><span data-k="kisiDeger">{s} tam zamanlı çalışan</span><span data-k="yMaliyet">Dosyalarla yürüyen takip size yılda yaklaşık {y} mal oluyor; bunun {b} kısmı {k}. Ekibin yılda {s} işe değil dosyaya gidiyor, bu {c} demek.</span><span data-k="kTekrar">tekrar giriş ve dosya arama</span><span data-k="kRapor">elle hazırlanan raporlar</span><span data-k="kHata">hatalar</span></div>
+
+<section class="aciklama">
+  <h2>Hesap nasıl yapılıyor?</h2>
+  <ul>
+    <li><strong>Tekrar giriş maliyeti</strong> = kişi sayısı × haftalık saat × 48 hafta × saat maliyeti</li>
+    <li><strong>Rapor maliyeti</strong> = aylık rapor saati × 12 × saat maliyeti</li>
+    <li><strong>Hata maliyeti</strong> = aylık hata sayısı × 12 × bir hatanın maliyeti</li>
+  </ul>
+  <p>Bu üç kalem bütçede hiçbir satırda görünmez: maaşın içinde, fazla mesainin içinde, "olur böyle şeyler" denen hataların içinde kaybolur. Bu yüzden bir yazılımın maliyeti konuşulurken karşısına çoğu zaman sıfır konur. Gerçek karşılaştırma, yazılımın maliyeti ile bu tablonun yıllık toplamı arasındadır. Ayrıntısı <a href="../../yazilar/excelden-erpye/">Excel'den ERP'ye</a> yazısında.</p>
+  <h2>Sık sorulan sorular</h2>
+<h3>Haftalık tekrar giriş süresini nasıl tahmin ederim?</h3>
+<p>Bir hafta boyunca ekipten birkaç kişiye, bir bilgiyi ikinci kez bir yere yazdıkları, dosya aradıkları ya da "hangi dosya güncel" diye sordukları süreyi not etmelerini isteyin. Çoğu firmada kişi başı haftada 3–6 saat çıkar.</p>
+<h3>Hangi hataları saymalıyım?</h3>
+<p>Yanlış ya da eksik giden sipariş, eksik malzeme yüzünden duran iş, faturası kesilmeyen teslimat, yanlış fiyatla giden teklif, kaçan termin. Maliyet olarak tekrar sevkiyatı, fazla mesaiyi, verilen indirimi ya da kaybedilen kârı yazın.</p>
+<h3>Bu maliyetin tamamı bir yazılımla ortadan kalkar mı?</h3>
+<p>Tamamı değil. Ama bilgi bir kez girilip her yerde aynı kayıttan okunduğunda tekrar giriş ve elle rapor süresinin büyük kısmı, dosyalar arası tutarsızlıktan doğan hataların çoğu ortadan kalkar.</p>
+<h3>Girdiğim rakamlar bir yere gönderiliyor mu?</h3>
+<p>Siz göndermedikçe hayır. Hesap tamamen tarayıcınızda yapılır ve kaydedilmez. Rakamlar yalnız “Sonucumu değerlendirin” formunu doldurup gönderirseniz, size dönebilmemiz için bize ulaşır.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>İşinizi kontrol altına alalım.</h2><p>Bir siparişinizin yolunu birlikte çıkaralım; nerede zaman ve para kaybettiğinizi görelim.</p><a class="btn main" href="../../#iletisim">İletişim bilgileri</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>Web sitesi, SEO ve dijital pazarlama için: <a href="https://vohdigital.com" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../araclar/arac.js"></script>
+</body>
+</html>

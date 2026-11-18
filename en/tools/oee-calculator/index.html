@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OEE calculator: machine efficiency · Qucod</title>
+<meta name="description" content="OEE from planned time, downtime, cycle time and units produced: availability, performance and quality, where losses come from and units lost.">
+<meta property="og:title" content="OEE calculator: machine efficiency">
+<meta property="og:description" content="OEE from planned time, downtime, cycle time and units produced: availability, performance and quality, where losses come from and units lost.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/oee-hesaplama/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/oee-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+<link rel="stylesheet" href="../../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Sections"><a href="../../#services">Services</a><a href="../../tools/">Tools</a><a href="../../articles/">Articles</a><a href="../../clients/">Clients</a><a href="../../#contact">Contact</a></nav>
+    <div class="lang" aria-label="Language"><a href="../../../araclar/oee-hesaplama/" hreflang="tr" lang="tr">TR</a><span aria-current="true">EN</span></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../tools/">← All tools</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Free tool</div>
+  <h1>OEE calculator</h1>
+  <p class="lead">Enter one machine's or line's figures for a shift. The tool calculates OEE (overall equipment effectiveness) with its three components and shows where most of the loss comes from.</p>
+  <div class="tgrid">
+    <form class="panel" id="oe" onsubmit="return false">
+      <h2>One shift or one day</h2>
+      <div class="alan"><label for="planli">Planned production time</label><div class="girdi"><input id="planli" type="number" inputmode="decimal" min="0" step="any"><span>minutes</span></div><small>Shift time minus breaks and planned maintenance.</small></div>
+      <div class="alan"><label for="durus">Unplanned downtime</label><div class="girdi"><input id="durus" type="number" inputmode="decimal" min="0" step="any"><span>minutes</span></div><small>Breakdowns, setups, mould changes, waiting for materials or an operator.</small></div>
+      <div class="alan"><label for="cevrim">Ideal cycle time</label><div class="girdi"><input id="cevrim" type="number" inputmode="decimal" min="0" step="any"><span>seconds/unit</span></div><small>The time it takes the machine to produce one part when nothing goes wrong.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="uretilen">Total produced</label><div class="girdi"><input id="uretilen" type="number" inputmode="decimal" min="0" step="1"><span>units</span></div><small>Including defective parts.</small></div>
+        <div class="alan"><label for="hatali">Defective or reworked</label><div class="girdi"><input id="hatali" type="number" inputmode="decimal" min="0" step="1"><span>units</span></div></div>
+      </div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Result</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">OEE</div><div class="deger" id="oeeDeger">–</div><div class="alt" id="oeeAlt"></div></div>
+        <div class="kutu"><div class="ad">Lost output</div><div class="deger" id="kayipAdet">–</div><div class="alt" id="kayipAlt"></div></div>
+      </div>
+      <div class="cubuklar">
+        <div><span>Availability</span><i><b id="cA"></b></i><em id="vA">–</em></div>
+        <div><span>Performance</span><i><b id="cP"></b></i><em id="vP">–</em></div>
+        <div><span>Quality</span><i><b id="cQ"></b></i><em id="vQ">–</em></div>
+      </div>
+      <p class="yorum" id="oeYorum"></p>
+      <div class="satir"><span>Time lost to downtime</span><b id="kDurus">–</b></div>
+      <div class="satir"><span>Time lost to slow running</span><b id="kHiz">–</b></div>
+      <div class="satir"><span>Time spent on defective parts</span><b id="kKalite">–</b></div>
+      <div class="satir"><span>Extra good parts at 85% OEE</span><b id="ek85">–</b></div>
+      <p class="not">The calculation is done in your browser; your figures go nowhere unless you send them.</p>
+    </section>
+  </div>
+</div>
+
+<div id="metin" hidden><span data-k="dk">{s} min</span><span data-k="adetDeger">{s} units</span><span data-k="kDurus">downtime</span><span data-k="kHiz">slow running</span><span data-k="kKalite">defective parts</span><span data-k="yDunya">OEE {o}: you're at a level considered world class. Most of the remaining loss comes from {k}.</span><span data-k="yOrta">OEE {o}. The machine turns out {o} of what it could produce in the planned time as good parts. The biggest loss is {k}: {d} minutes. Look at that first.</span><span data-k="yDusuk">OEE {o}: more than half of the machine's capacity is being lost. The biggest loss is {k}: {d} minutes. If downtime isn't recorded with its causes, that should be the first step.</span><span data-k="yHata">Performance comes out above 100%: either the ideal cycle time is entered longer than it really is, or the units produced figure is too high. Check the values.</span></div>
+
+<section class="aciklama">
+  <h2>How is it calculated?</h2>
+  <ul>
+    <li><strong>Availability</strong> = (planned time − downtime) ÷ planned time</li>
+    <li><strong>Performance</strong> = (ideal cycle time × units produced) ÷ run time</li>
+    <li><strong>Quality</strong> = (produced − defective) ÷ produced</li>
+    <li><strong>OEE</strong> = availability × performance × quality. It shows how much of the maximum output possible in the planned time came out as good parts.</li>
+  </ul>
+  <p>Calculating OEE once is the easy part. The benefit comes when it's measured every day for every machine and downtime is recorded with its causes. Downtime written on paper or in Excel at the end of the day is both incomplete and late. When the operator picks the stoppage on a tablet as it happens, you can see straight away how many hours a month each breakdown, each mould or each wait for materials costs you. More on this in the <a href="../../articles/production-management-software/">production management software</a> article.</p>
+  <h2>Frequently asked questions</h2>
+<h3>What is a good OEE?</h3>
+<p>Around 85% is considered world class. In companies that have just started measuring, 40–60% is common. What matters more than the figure itself is which of the three components the loss is concentrated in, and how it changes from week to week.</p>
+<h3>Where do I find the ideal cycle time?</h3>
+<p>The time it takes the machine or mould to produce one part when nothing goes wrong. Use the value in the machine's specifications or the best sustained speed you've seen. If performance comes out above 100%, the cycle time you entered is too long.</p>
+<h3>Are breaks included in planned time?</h3>
+<p>No. Subtract from the shift time anything you already know won't be worked, such as lunch, tea breaks and planned maintenance. Breakdowns, setups, mould changes and waiting for materials are entered as downtime.</p>
+<h3>Are the numbers I enter sent anywhere?</h3>
+<p>Not unless you send them. The calculation is done entirely in your browser and nothing is saved. Your figures reach us only if you fill in and send the “Evaluate my result” form, so that we can get back to you.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>Let’s bring your business under control.</h2><p>We map the path of one of your orders together and see where time and money are lost.</p><a class="btn main" href="../../#contact">Contact details</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>For websites, SEO and digital marketing: <a href="https://vohdigital.com/en/" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../../araclar/arac.js"></script>
+</body>
+</html>

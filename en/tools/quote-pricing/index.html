@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quote price and profit margin calculator · Qucod</title>
+<meta name="description" content="The right selling price from cost and target margin: markup vs. margin, what a discount takes out of profit and the extra sales needed to make up for it.">
+<meta property="og:title" content="Quote price and profit margin calculator">
+<meta property="og:description" content="The right selling price from cost and target margin: markup vs. margin, what a discount takes out of profit and the extra sales needed to make up for it.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/teklif-fiyati/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/quote-pricing/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+<link rel="stylesheet" href="../../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Sections"><a href="../../#services">Services</a><a href="../../tools/">Tools</a><a href="../../articles/">Articles</a><a href="../../clients/">Clients</a><a href="../../#contact">Contact</a></nav>
+    <div class="lang" aria-label="Language"><a href="../../../araclar/teklif-fiyati/" hreflang="tr" lang="tr">TR</a><span aria-current="true">EN</span></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../tools/">← All tools</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Free tool</div>
+  <h1>Quote price and margin calculator</h1>
+  <p class="lead">Enter your cost and the profit margin you're aiming for. The tool shows the right selling price, where adding a percentage to cost misleads you and what a discount takes out of profit.</p>
+  <div class="tgrid">
+    <form class="panel" id="tf" onsubmit="return false">
+      <h2>Product or job</h2>
+      <div class="alan"><label for="maliyet">Total cost</label><div class="girdi"><input id="maliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Including materials, labour, subcontractors, transport and a share of overheads. Unit cost for a product, total cost for a job.</small></div>
+      <div class="alan"><label for="hedefMarj">Target profit margin</label><div class="girdi"><input id="hedefMarj" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Profit as a share of the selling price.</small></div>
+      <div class="alan"><label for="iskonto">Discount to the customer</label><div class="girdi"><input id="iskonto" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>The rate taken off the price in negotiation or a promotion. Enter 0 if none.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Result</h2>
+      <div class="buyuk">
+        <div class="kutu ana"><div class="ad">Selling price for target margin</div><div class="deger" id="dogruFiyat">–</div><div class="alt" id="dogruMarj"></div></div>
+        <div class="kutu"><div class="ad">Price after discount</div><div class="deger" id="iskFiyat">–</div><div class="alt" id="iskMarj"></div></div>
+      </div>
+      <p class="yorum" id="tfYorum"></p>
+      <div class="satir"><span>Price when the same percentage is added to cost</span><b id="ekleFiyat">–</b></div>
+      <div class="satir"><span>Actual margin at this price</span><b id="ekleMarj">–</b></div>
+      <div class="satir"><span>Markup needed for the target margin</span><b id="gerekEkle">–</b></div>
+      <div class="satir"><span>Profit per unit before / after discount</span><b id="birimKar">–</b></div>
+      <div class="satir"><span>Extra sales needed to make up for the discount</span><b id="telafi">–</b></div>
+      <p class="not">The calculation is done in your browser; your figures go nowhere unless you send them.</p>
+    </section>
+  </div>
+  <div class="indir"><p><strong>To prepare all your quotes in one file</strong>A quote form that pulls prices from the product list, a margin check on every line and a log of won / lost quotes.</p><a class="btn btn-cizgi" href="../../../araclar/sablonlar/teklif-hazirlama-tr.xlsx" data-en-href="../../../araclar/sablonlar/teklif-hazirlama-en.xlsx" download>Download the Excel template</a></div>
+</div>
+
+<div id="metin" hidden><span data-k="marj">margin {m}</span><span data-k="yEkle">If you add {h} to cost, the price is {e}, but your margin comes out at {g}, not {h}. For the margin you're aiming for, the price should be {f}; every sale is {k} short.</span><span data-k="yIsk"> With a {i} discount the margin drops by {s}. To keep the same total profit you need to sell {a} more.</span><span data-k="yIskZarar"> With a {i} discount the price falls below cost: at this discount every sale loses money.</span><span data-k="yok">can't be made up</span></div>
+
+<section class="aciklama">
+  <h2>How is it calculated?</h2>
+  <ul>
+    <li><strong>Price for target margin</strong> = cost ÷ (1 − target margin)</li>
+    <li><strong>Price found by adding to cost</strong> = cost × (1 + markup). The margin at this price is always lower than the markup added.</li>
+    <li><strong>Margin after discount</strong> = 1 − cost ÷ (price × (1 − discount))</li>
+    <li><strong>Extra sales needed to make up</strong> = profit per unit before discount ÷ profit per unit after discount − 1</li>
+  </ul>
+  <h3>Margin and the matching markup</h3>
+  <table class="tablo">
+    <tr><th>Target margin</th><th>Markup on cost</th></tr>
+    <tr><td>%10</td><td>%11,1</td></tr>
+    <tr><td>%15</td><td>%17,6</td></tr>
+    <tr><td>%20</td><td>%25</td></tr>
+    <tr><td>%25</td><td>%33,3</td></tr>
+    <tr><td>%30</td><td>%42,9</td></tr>
+    <tr><td>%40</td><td>%66,7</td></tr>
+  </table>
+  <p>The most common mistake in quoting is treating the target margin as a percentage added to cost. The second is leaving labour hours and overheads out of the cost. Put the two together and at year end you're looking at far less profit than you aimed for. If prices and costs come from the same place when you prepare a quote, the margin on every line is visible before the quote goes out. More on this in the article <a href="../../articles/quoting-process/">time and profit lost in the quoting process</a>.</p>
+  <h2>Frequently asked questions</h2>
+<h3>Aren't profit margin and markup the same thing?</h3>
+<p>No. Margin is profit as a share of the selling price; markup is profit as a share of cost. If you add 25% to a product that costs 100, you sell it for 125, but your margin is 20%. For a 25% margin the price has to be 133.3.</p>
+<h3>What should I include in the cost?</h3>
+<p>Besides materials, include labour hours, any subcontractors and transport, and the share of overheads that falls on the product or job. For labour you can use the <a href="../../tools/hourly-cost/">hourly cost tool</a>. A price calculated on incomplete costs comes out too low, however correct the formula.</p>
+<h3>Why can a 10% discount wipe out half your profit?</h3>
+<p>A discount comes off the price, but the cost stays the same. So the whole discount comes out of profit. At a 25% margin, a 10% discount cuts the profit per unit by more than a third; to keep the same total profit you have to sell a lot more.</p>
+<h3>Are the numbers I enter sent anywhere?</h3>
+<p>Not unless you send them. The calculation is done entirely in your browser and nothing is saved. Your figures reach us only if you fill in and send the “Evaluate my result” form, so that we can get back to you.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>Let’s bring your business under control.</h2><p>We map the path of one of your orders together and see where time and money are lost.</p><a class="btn main" href="../../#contact">Contact details</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>For websites, SEO and digital marketing: <a href="https://vohdigital.com/en/" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../../araclar/arac.js"></script>
+</body>
+</html>

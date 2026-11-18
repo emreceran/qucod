@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Project profitability calculator · Qucod</title>
+<meta name="description" content="Project profitability calculator: enter the quote, materials, labour hours and overheads to see a job&#x27;s apparent and real profit and its break-even hours.">
+<meta property="og:title" content="Project profitability calculator">
+<meta property="og:description" content="Project profitability calculator: enter the quote, materials, labour hours and overheads to see a job&#x27;s apparent and real profit and its break-even hours.">
+<meta property="og:site_name" content="Qucod">
+<meta name="theme-color" content="#1c2430">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="tr" href="https://emreceran.github.io/qucod/araclar/proje-karliligi/">
+<link rel="alternate" hreflang="en" href="https://emreceran.github.io/qucod/en/tools/project-profitability/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../style.css">
+<link rel="stylesheet" href="../../../araclar/arac.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="m" viewBox="0 0 64 64">
+<rect fill="currentColor" x="8" y="34" width="12" height="18" rx="1.5"/><rect fill="currentColor" x="26" y="24" width="12" height="28" rx="1.5"/>
+<rect class="g" x="44" y="12" width="12" height="40" rx="1.5"/><rect fill="currentColor" x="4" y="54" width="56" height="3" rx="1"/></symbol></defs></svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../"><svg aria-hidden="true"><use href="#m"/></svg><b>qucod</b></a>
+    <div class="top-r">
+    <nav aria-label="Sections"><a href="../../#services">Services</a><a href="../../tools/">Tools</a><a href="../../articles/">Articles</a><a href="../../clients/">Clients</a><a href="../../#contact">Contact</a></nav>
+    <div class="lang" aria-label="Language"><a href="../../../araclar/proje-karliligi/" hreflang="tr" lang="tr">TR</a><span aria-current="true">EN</span></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="wrap"><a class="back mono" href="../../tools/">← All tools</a></div><div class="tool">
+  
+  <div class="kicker" style="margin-top:22px">Free tool</div>
+  <h1>Project profitability calculator</h1>
+  <p class="lead">Enter a job's quoted amount and its costs. The tool shows side by side the apparent profit based on invoiced costs, and the real profit left once team hours and overheads are added.</p>
+  <div class="tgrid">
+    <form class="panel" id="pk" onsubmit="return false">
+      <h2>The job's numbers</h2>
+      <div class="alan"><label for="tutar">Quote / contract amount</label><div class="girdi"><input id="tutar" type="number" inputmode="decimal" min="0" step="any"><span>¤ · excl. VAT</span></div></div>
+      <div class="iki">
+        <div class="alan"><label for="malzeme">Materials and purchases</label><div class="girdi"><input id="malzeme" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div></div>
+        <div class="alan"><label for="taseron">Subcontractors and outside services</label><div class="girdi"><input id="taseron" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div></div>
+      </div>
+      <div class="alan"><label for="diger">Other direct costs</label><div class="girdi"><input id="diger" type="number" inputmode="decimal" min="0" step="any"><span>¤</span></div><small>Costs specific to this job, such as transport, travel, accommodation and hired equipment.</small></div>
+      <div class="iki">
+        <div class="alan"><label for="saat">Hours the team spent on this job</label><div class="girdi"><input id="saat" type="number" inputmode="decimal" min="0" step="any"><span>hours</span></div><small>Total for all employees.</small></div>
+        <div class="alan"><label for="saatMaliyet">Cost of one working hour</label><div class="girdi"><input id="saatMaliyet" type="number" inputmode="decimal" min="0" step="any"><span>¤/hour</span></div><small>If you don't know it, work it out with the <a href="../../tools/hourly-cost/" style="color:var(--accent)">hourly cost tool</a>.</small></div>
+      </div>
+      <div class="alan"><label for="genel">Overhead rate</label><div class="girdi"><input id="genel" type="number" inputmode="decimal" min="0" step="any"><span>%</span></div><small>Costs such as rent, office, management and vehicles as a share of revenue.</small></div>
+    </form>
+    <section class="panel sonuc" aria-live="polite">
+      <h2>Result</h2>
+      <div class="buyuk">
+        <div class="kutu"><div class="ad">Apparent profit<br>(invoiced costs only)</div><div class="deger" id="gorunen">–</div><div class="alt" id="gorunenMarj"></div></div>
+        <div class="kutu ana"><div class="ad">Real profit<br>(incl. team hours and overheads)</div><div class="deger" id="gercek">–</div><div class="alt" id="gercekMarj"></div></div>
+      </div>
+      <div class="serit" id="serit"></div>
+      <div class="lejant"><span><b style="background:#6366F1"></b>Materials</span><span><b style="background:#22D3EE"></b>Subcontractors</span><span><b style="background:#94A3B8"></b>Other</span><span><b style="background:#F59E0B"></b>Team hours</span><span><b style="background:#A78BFA"></b>Overheads</span><span><b style="background:#34D399"></b>Profit</span></div>
+      <p class="yorum" id="pkYorum"></p>
+      <div class="satir"><span>Maximum hours before the job loses money</span><b id="basabas">–</b></div>
+      <div class="satir"><span>What each hour worked on this job brings in</span><b id="saatKazanc">–</b></div>
+      <div class="satir"><span>Real profit if labour runs 20% over</span><b id="sapma">–</b></div>
+      <p class="not">The calculation is done in your browser; your figures go nowhere unless you send them.</p>
+    </section>
+  </div>
+  <div class="indir"><p><strong>To track all your projects</strong>An Excel template with budget vs. actual per project, hour and expense logs, and overrun alerts.</p><a class="btn btn-cizgi" href="../../../araclar/sablonlar/proje-karlilik-takibi-tr.xlsx" data-en-href="../../../araclar/sablonlar/proje-karlilik-takibi-en.xlsx" download>Download the Excel template</a></div>
+</div>
+
+<div id="metin" hidden><span data-k="marj">margin {m}</span><span data-k="saatDeger">{s} hours</span><span data-k="yok">cannot be calculated</span><span data-k="yZarar">This job is losing money. Looking only at invoiced costs it seems profitable; once team hours and overheads are added there is a gap of {f} and the profit goes negative.</span><span data-k="yInce">There's a profit, but it's thin: the real margin is {m}. The {f} gap from the apparent profit comes from team hours and overheads. If labour runs a little over, the profit melts away fast.</span><span data-k="yIyi">This job makes a profit, with a real margin of {m}. Still, the {f} gap from the apparent profit shows how misleading the numbers are when team hours aren't counted.</span></div>
+
+<section class="aciklama">
+  <h2>How is it calculated?</h2>
+  <p>Most project-based companies work out a job's profit by subtracting material and subcontractor invoices from the quoted amount. That figure is misleading, because the hours of your own team doing the work and the overheads that keep the company running don't come with an invoice.</p>
+  <ul>
+    <li><strong>Apparent profit</strong> = quoted amount − materials − subcontractors − other direct costs</li>
+    <li><strong>Real profit</strong> = apparent profit − (hours worked × hourly cost) − (quoted amount × overhead rate)</li>
+    <li><strong>Break-even hours</strong> are found by dividing what's left after all costs other than team hours by the hourly cost. If the job goes past these hours, it starts losing money.</li>
+  </ul>
+  <p>Hours are where estimates go wrong most often. The hours planned when quoting and the hours spent by the time the job is done are rarely the same, and the gap only shows if hours are booked to the job. In a system where hours are logged against jobs every day, you can follow this picture while the job is still running, not after it's finished. More on this in the article <a href="../../articles/measuring-project-profitability/">how to measure project profitability</a>.</p>
+  <h2>Frequently asked questions</h2>
+<h3>What overhead rate should I enter?</h3>
+<p>Add up last year's costs that aren't booked directly to projects, such as rent, office staff, vehicles and software, and divide by your annual revenue. The result is your overhead rate. If you don't know it, start with 10–15% and then try the result with 20% too.</p>
+<h3>Where do I get the hourly cost from?</h3>
+<p>Divide an employee's total annual cost to you by the hours in the year that can actually be billed to jobs. The <a href="../../tools/hourly-cost/">hourly cost tool</a> does this and carries the result over here.</p>
+<h3>Why is the gap between apparent and real profit so big?</h3>
+<p>Costs that come with an invoice (materials, subcontractors, transport) are easy to see. The hours your own team spends on the job and the company's overheads don't come with an invoice, and are often left out of the calculation altogether. The gap is exactly these two items.</p>
+<h3>Are the numbers I enter sent anywhere?</h3>
+<p>Not unless you send them. The calculation is done entirely in your browser and nothing is saved. Your figures reach us only if you fill in and send the “Evaluate my result” form, so that we can get back to you.</p>
+
+</section><div class="wrap"><div class="post-end"><h2>Let’s bring your business under control.</h2><p>We map the path of one of your orders together and see where time and money are lost.</p><a class="btn main" href="../../#contact">Contact details</a></div></div>
+</main>
+<footer>
+  <div class="wrap mono">
+    <span>qucod · İçerenköy, Eryılmazlar Sk. No:3 D:11, 34752 Ataşehir / İstanbul</span>
+    <span>For websites, SEO and digital marketing: <a href="https://vohdigital.com/en/" rel="noopener">VOH Digital</a></span>
+  </div>
+</footer>
+<script src="../../../araclar/arac.js"></script>
+</body>
+</html>
